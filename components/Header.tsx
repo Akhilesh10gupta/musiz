@@ -30,12 +30,12 @@ const Header = () => {
         {/* Desktop Navigation Menu */}
         <nav className="hidden sm:flex items-center space-x-6 text-sm uppercase font-light tracking-wide">
           <Link href="/" className="">Home</Link>
-          <Link href="/about" className="hover:text-gray-300">About</Link>
+          <Link href="/about" className="hover:text-gray-300">Projects</Link>
 
           {/* WORK MENU - DESKTOP */}
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center hover:text-gray-300 cursor-pointer focus:outline-none">
-              <span>Work</span>
+              <span>WORK</span>
               <ChevronDown className="w-4 h-4 ml-1" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-transparent text-white">
@@ -52,7 +52,7 @@ const Header = () => {
           </DropdownMenu>
 
           <Link href="/services" className="hover:text-gray-300">Services</Link>
-          <Link href="/studio" className="hover:text-gray-300">SiR Musiz Studios</Link>
+          <Link href="/studio" className="hover:text-gray-300">About Us</Link>
         </nav>
 
         {/* Contact Button - hide on mobile */}
@@ -81,7 +81,7 @@ const Header = () => {
       {menuOpen && (
         <nav className="sm:hidden bg-transparent bg-opacity-80 backdrop-blur-md w-full px-6 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-white">
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>Projects</Link>
 
           {/* WORK MENU - MOBILE */}
           <div className="flex flex-col">
@@ -89,7 +89,7 @@ const Header = () => {
               onClick={toggleMobileWork}
               className="flex items-center justify-between focus:outline-none"
             >
-              <span>Work</span>
+              <span>WORK</span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
                   mobileWorkOpen ? 'rotate-180' : 'rotate-0'
@@ -106,7 +106,7 @@ const Header = () => {
           </div>
 
           <Link href="/services" onClick={() => setMenuOpen(false)}>Services</Link>
-          <Link href="/studio" onClick={() => setMenuOpen(false)}>SiR Musiz Studios</Link>
+          <Link href="/studio" onClick={() => setMenuOpen(false)}>About us</Link>
           <Link
             href="/contact"
             onClick={() => setMenuOpen(false)}

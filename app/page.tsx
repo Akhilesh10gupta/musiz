@@ -4,9 +4,9 @@ import Container from '@/components/Container'
 
 const Home = () => {
   return (
-    <Container>
+    <Container className='bg-black'>
       <h2 className='font-medium text-sky-500'>Hellow world</h2>
-      <Button variant="destructive"> checkit</Button>
+      
     </Container>
   )
 }

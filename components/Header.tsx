@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-transparent text-white backdrop-blur-sm shadow-sm">
-      <Container className="flex items-center justify-between py-4">
+      <Container className="flex items-center justify-between py-4 px-4">
         {/* Logo */}
         <div className="text-2xl font-cursive">
           <span className="font-semibold">SiR Musiz</span>
@@ -79,7 +79,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <nav className="sm:hidden bg-transparent bg-opacity-80 backdrop-blur-md w-full px-6 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-white">
+        <nav className="sm:hidden bg-transparent bg-opacity-80 backdrop-blur-md w-full px-8 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-white">
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>Projects</Link>
 

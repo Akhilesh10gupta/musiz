@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const Hero = () => {
   return (
-    <div className=" relative min-h-screen bg-gradient-to-br from-black via-blue-900 to-black flex items-center justify-center text-center overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 flex items-center justify-center text-center overflow-hidden">
       {/* Animated Background Blur Circle */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-800 opacity-20 rounded-full blur-3xl z-0" />
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-indigo-600 opacity-20 rounded-full blur-3xl z-0" />
@@ -16,11 +16,11 @@ const Hero = () => {
         transition={{ duration: 1.2 }}
         className="relative z-10 px-6"
       >
-        <h1 className="text-white text-4xl sm:text-6xl font-bold leading-tight">
+        <h1 className="text-black text-4xl sm:text-6xl font-bold leading-tight">
           Your next big<br />project <span className="text-blue-400">awaits!</span>
         </h1>
 
-        <p className="text-gray-300 mt-4 text-lg max-w-xl mx-auto">
+        <p className="text-black mt-4 text-lg max-w-xl mx-auto">
           We’re on with your hustle journey, through our <br />comprehensive sound and music production services.
         </p>
 

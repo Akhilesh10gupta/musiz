@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Container from './Container';
 import {
@@ -19,13 +20,21 @@ const Header = () => {
   const toggleMobileWork = () => setMobileWorkOpen(!mobileWorkOpen);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-transparent text-white backdrop-blur-sm shadow-sm">
-      <Container className="flex items-center justify-between py-4 px-4">
+    <header className="fixed top-0 left-0 w-full z-50 bg-transparent text-black backdrop-blur-sm shadow-sm">
+      <Container className="flex items-center justify-between py-4 px-4 ">
         {/* Logo */}
-        <div className="text-2xl font-cursive">
-          <span className="font-semibold">SiR Musiz</span>
-          <div className="text-xs tracking-widest ml-1">Studios</div>
-        </div>
+        {/* Logo with Image */}
+        <Link href="/" className="flex items-center space-x-2 ">
+          <Image
+            src="/logo.png" 
+            alt="SiR Musiz Studios Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+            priority
+          />
+      </Link>
+
 
         {/* Desktop Navigation Menu */}
         <nav className="hidden sm:flex items-center space-x-6 text-sm uppercase font-light tracking-wide">
@@ -38,7 +47,7 @@ const Header = () => {
               <span>WORK</span>
               <ChevronDown className="w-4 h-4 ml-1" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-transparent text-white">
+            <DropdownMenuContent className="bg-black text-white">
               <DropdownMenuItem asChild>
                 <Link href="/work/music">Music Projects</Link>
               </DropdownMenuItem>
@@ -58,7 +67,7 @@ const Header = () => {
         {/* Contact Button - hide on mobile */}
         <Link
           href="/contact"
-          className="hidden sm:inline-block border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition duration-200"
+          className="hidden sm:inline-block border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition duration-200"
         >
           Contact Us
         </Link>
@@ -79,7 +88,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <nav className="sm:hidden bg-transparent bg-opacity-80 backdrop-blur-md w-full px-8 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-white">
+        <nav className="sm:hidden bg-transparent bg-opacity-80 backdrop-blur-md w-full px-8 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-black">
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>Projects</Link>
 

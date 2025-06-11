@@ -32,7 +32,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden sm:flex items-center space-x-6 text-sm uppercase font-light tracking-wide relative">
           <Link href="/">Home</Link>
-          <Link href="/about" className="hover:text-gray-300">Projects</Link>
+          <Link href="/projects" className="hover:text-gray-300">Projects</Link>
 
           {/* WORK Menu with Hover Dropdown */}
           <div
@@ -88,7 +88,7 @@ const Header = () => {
           </div>
 
           <Link href="/services" className="hover:text-gray-300">Services</Link>
-          <Link href="/studio" className="hover:text-gray-300">About Us</Link>
+          <Link href="/about" className="hover:text-gray-300">About Us</Link>
         </nav>
 
         {/* Desktop Contact Button */}
@@ -111,42 +111,59 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <nav className="sm:hidden bg-white bg-opacity-90 backdrop-blur-md w-full px-8 py-4 flex flex-col space-y-4 uppercase font-light tracking-wide text-black">
-          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>Projects</Link>
+        <div className="sm:hidden px-4 pt-4">
+          <div className="bg-[#1c1c1c] text-gray-300 rounded-lg shadow-xl p-6 flex flex-col space-y-5 text-sm uppercase font-light tracking-wide">
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Home
+            </Link>
+            <Link href="/projects" onClick={() => setMenuOpen(false)} className="text-white ">
+              Projects
+            </Link>
 
-          {/* Mobile Work Submenu */}
-          <div className="flex flex-col">
-            <button
-              onClick={toggleMobileWork}
-              className="flex items-center justify-between focus:outline-none"
+            {/* Mobile Work Submenu */}
+            <div className="flex flex-col">
+              <button
+                onClick={toggleMobileWork}
+                className="flex items-center justify-between text-left hover:text-white focus:outline-none"
+              >
+                <span>Work</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    mobileWorkOpen ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
+              </button>
+              {mobileWorkOpen && (
+                <div className="flex flex-col space-y-2 mt-2 pl-4 text-sm">
+                  <Link href="/work/music" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                    Music Projects
+                  </Link>
+                  <Link href="/work/film" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                    Film Scoring
+                  </Link>
+                  <Link href="/work/commercial" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                    Commercials
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link href="/services" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              Services
+            </Link>
+            <Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-white">
+              about us
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-2 border border-white px-4 py-2 rounded text-center font-semibold hover:bg-white hover:text-black transition duration-200"
             >
-              <span>WORK</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  mobileWorkOpen ? 'rotate-180' : 'rotate-0'
-                }`}
-              />
-            </button>
-            {mobileWorkOpen && (
-              <div className="flex flex-col space-y-2 mt-2 pl-4 text-sm">
-                <Link href="/work/music" onClick={() => setMenuOpen(false)}>Music Projects</Link>
-                <Link href="/work/film" onClick={() => setMenuOpen(false)}>Film Scoring</Link>
-                <Link href="/work/commercial" onClick={() => setMenuOpen(false)}>Commercials</Link>
-              </div>
-            )}
+              Contact Us
+            </Link>
           </div>
-
-          <Link href="/services" onClick={() => setMenuOpen(false)}>Services</Link>
-          <Link href="/studio" onClick={() => setMenuOpen(false)}>About us</Link>
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
-            className="border border-black px-4 py-2 rounded text-center hover:bg-black hover:text-white transition duration-200"
-          >
-            Contact Us
-          </Link>
-        </nav>
+        </div>
       )}
     </header>
   );

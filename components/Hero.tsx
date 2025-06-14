@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useRef } from 'react'          // ← removed unused useState
+import React, { useRef } from 'react'
 import { motion, useCycle } from 'framer-motion'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
-// import Image from 'next/image'               // ← removed; not used
 
 /**
  * Enhanced Hero section
@@ -13,6 +12,7 @@ import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
  * - Vinyl has glow & gentle bob animation
  * - Play / pause SVG icons (react‑icons)
  * - Gradient CTA button
+ * - **New:** pulsing / ping effect on play‑pause button so users know it’s clickable
  * --------------------------------------------------
  */
 
@@ -22,12 +22,7 @@ export default function Hero() {
 
   const handleToggle = () => {
     if (!audioRef.current) return
-    // eslint-disable-next-line no-lonely-if
-    if (isPlaying) {
-      audioRef.current.pause()
-    } else {
-      audioRef.current.play()
-    }
+    isPlaying ? audioRef.current.pause() : audioRef.current.play()
     toggle()
   }
 
@@ -77,8 +72,8 @@ export default function Hero() {
         </h1>
 
         <p className="mt-6 text-lg sm:text-xl text-gray-800/90">
-          We’re on with your hustle journey, through our<br />comprehensive sound and music
-          production services.
+          We’re on with your hustle journey, through our<br />
+          comprehensive sound and music production services.
         </p>
 
         <motion.a
@@ -111,16 +106,25 @@ export default function Hero() {
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
 
-        {/* control button */}
-        <button
+        {/* control button –– now with pulse / ping effect */}
+        <motion.button
           onClick={handleToggle}
+          initial={{ scale: 1 }}
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.9 }}
           className="absolute inset-0 flex items-center justify-center focus:outline-none"
         >
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg
-                           transition-colors hover:bg-blue-600 sm:h-20 sm:w-20">
+          {/* ping ring appears only when music is paused – subtly invites users to click */}
+          {!isPlaying && (
+            <span className="absolute inline-flex h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-blue-500/70 opacity-75 animate-ping" />
+          )}
+
+          <span className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg">
             {isPlaying ? <BsPauseFill size={28} /> : <BsFillPlayFill size={28} />}
           </span>
-        </button>
+        </motion.button>
       </motion.div>
     </section>
   )

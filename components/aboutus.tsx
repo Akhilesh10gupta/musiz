@@ -35,7 +35,7 @@ const About = () => {
         transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
       />
 
-      {/* Content Wrapper to keep text above blobs */}
+      {/* Content Wrapper */}
       <div className="relative z-10 max-w-5xl w-full">
         <motion.h2
           variants={fadeUp}
@@ -55,7 +55,7 @@ const About = () => {
           viewport={{ once: true }}
           className="text-gray-700 max-w-3xl text-lg sm:text-xl mx-auto mb-12 leading-relaxed"
         >
-          SiR Musiz is not just a studio – it's where music, dreams, and visual creativity collide. With a passion for originality and emotion, we deliver a wide spectrum of audio‑visual experiences. From official releases to underground demos, every project echoes our relentless devotion to sonic storytelling.
+          {`SiR Musiz is not just a studio – it's where music, dreams, and visual creativity collide. With a passion for originality and emotion, we deliver a wide spectrum of audio-visual experiences. From official releases to underground demos, every project echoes our relentless devotion to sonic storytelling.`}
         </motion.p>
 
         <motion.div
@@ -145,8 +145,10 @@ const About = () => {
               />
             </div>
             <div>
-              <h4 className="text-xl font-semibold text-blue-600">XYZ </h4>
-              <p className="text-gray-600 max-w-md">The creative mind behind SiR Musiz. With a vision to blend sound and story, he leads every project with passion, innovation, and deep musical intuition.</p>
+              <h4 className="text-xl font-semibold text-blue-600">XYZ</h4>
+              <p className="text-gray-600 max-w-md">
+                The creative mind behind SiR Musiz. With a vision to blend sound and story, he leads every project with passion, innovation, and deep musical intuition.
+              </p>
             </div>
           </div>
         </motion.div>

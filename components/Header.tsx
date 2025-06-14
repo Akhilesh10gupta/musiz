@@ -1,22 +1,39 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronDown, Menu, X } from 'lucide-react';
-import Container from './Container';
+import React, { useState, useRef } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import Container from './Container'
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
-  const [workHover, setWorkHover] = useState(false);
+const Header: React.FC = () => {
+  /* ------------ state ------------ */
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false)
+  const [workHover, setWorkHover] = useState(false)
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const toggleMobileWork = () => setMobileWorkOpen(!mobileWorkOpen);
+  /* Browser timeout ID is a number, so type the ref that way */
+  const hoverTimeoutRef = useRef<number | null>(null)
 
+  /* ------------ helpers ------------ */
+  const toggleMenu = () => setMenuOpen(prev => !prev)
+  const toggleMobileWork = () => setMobileWorkOpen(prev => !prev)
+
+  const clearHoverTimeout = () => {
+    if (hoverTimeoutRef.current !== null) {
+      window.clearTimeout(hoverTimeoutRef.current)
+      hoverTimeoutRef.current = null
+    }
+  }
+
+  const startHoverTimeout = () => {
+    hoverTimeoutRef.current = window.setTimeout(() => setWorkHover(false), 200)
+  }
+
+  /* ------------ render ------------ */
   return (
-    <header className="h-[72px] fixed top-0 left-0 w-full z-50 bg-transparent text-black backdrop-blur-sm shadow-sm">
-      <Container className="flex items-center justify-between py-4 px-4">
+    <header className="fixed top-0 left-0 z-50 h-[72px] w-full bg-transparent text-black backdrop-blur-sm shadow-sm">
+      <Container className="flex items-center justify-between px-4 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
@@ -30,40 +47,33 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden sm:flex items-center space-x-6 text-sm uppercase font-light tracking-wide relative">
-          <Link href="/" className='font-semibold hover:text-blue-400'>Home</Link>
-          <Link href="#projects"  className="hover:text-blue-400 font-semibold">Projects</Link>
+        <nav className="relative hidden items-center space-x-6 text-sm uppercase font-light tracking-wide sm:flex">
+          <Link href="/" className="font-semibold hover:text-blue-400">
+            Home
+          </Link>
+          <Link href="#projects" className="font-semibold hover:text-blue-400">
+            Projects
+          </Link>
 
-          {/* WORK Menu with Hover Dropdown */}
+          {/* WORK menu with hover dropdown */}
           <div
             className="relative"
             onMouseEnter={() => {
-              clearTimeout((window as any).workTimeout);
-              setWorkHover(true);
+              clearHoverTimeout()
+              setWorkHover(true)
             }}
-            onMouseLeave={() => {
-              (window as any).workTimeout = setTimeout(() => {
-                setWorkHover(false);
-              }, 200);
-            }}
+            onMouseLeave={startHoverTimeout}
           >
-            <button className="flex items-center hover:text-blue-400 cursor-pointer focus:outline-none">
-              <span className='font-semibold'>WORK</span>
-              <ChevronDown className="w-4 h-4 ml-1" />
+            <button className="flex cursor-pointer items-center focus:outline-none hover:text-blue-400">
+              <span className="font-semibold">Work</span>
+              <ChevronDown className="ml-1 h-4 w-4" />
             </button>
 
             {workHover && (
               <div
-                className="absolute top-full mt-2 left-0 bg-black text-white shadow-lg rounded-md py-2 w-48 z-50"
-                onMouseEnter={() => {
-                  clearTimeout((window as any).workTimeout);
-                  setWorkHover(true);
-                }}
-                onMouseLeave={() => {
-                  (window as any).workTimeout = setTimeout(() => {
-                    setWorkHover(false);
-                  }, 200);
-                }}
+                className="absolute left-0 top-full z-50 mt-2 w-48 rounded-md bg-black py-2 text-white shadow-lg"
+                onMouseEnter={clearHoverTimeout}
+                onMouseLeave={startHoverTimeout}
               >
                 <Link
                   href="/work/music"
@@ -87,86 +97,118 @@ const Header = () => {
             )}
           </div>
 
-          <Link href="#services" className="hover:text-blue-500 font-semibold">Services</Link>
-          <Link href="#about" className="hover:text-blue-500 font-semibold">About Us</Link>
+          <Link href="#services" className="font-semibold hover:text-blue-500">
+            Services
+          </Link>
+          <Link href="#about" className="font-semibold hover:text-blue-500">
+            About&nbsp;Us
+          </Link>
         </nav>
 
-        {/* Desktop Contact Button */}
+        {/* Desktop contact button */}
         <Link
           href="/contact"
-          className="hidden font-semibold sm:inline-block border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition duration-200"
+          className="hidden border border-black px-4 py-2 font-semibold transition duration-200 hover:bg-black hover:text-white sm:inline-block"
         >
-          Contact Us
+          Contact&nbsp;Us
         </Link>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile menu toggle */}
         <button
           onClick={toggleMenu}
-          className="sm:hidden focus:outline-none"
+          className="focus:outline-none sm:hidden"
           aria-label="Toggle menu"
         >
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </Container>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="sm:hidden px-4 pt-4">
-          <div className="bg-[#1c1c1c] text-gray-300 rounded-lg shadow-xl p-6 flex flex-col space-y-5 text-sm uppercase font-light tracking-wide">
-            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-white">
+        <div className="px-4 pt-4 sm:hidden">
+          <div className="flex flex-col space-y-5 rounded-lg bg-[#1c1c1c] p-6 text-sm uppercase font-light tracking-wide text-gray-300 shadow-xl">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
               Home
             </Link>
-            <Link href="#projects" onClick={() => setMenuOpen(false)} className="text-white ">
+            <Link
+              href="#projects"
+              onClick={() => setMenuOpen(false)}
+              className="text-white"
+            >
               Projects
             </Link>
 
-            {/* Mobile Work Submenu */}
+            {/* Mobile Work submenu */}
             <div className="flex flex-col">
               <button
                 onClick={toggleMobileWork}
-                className="flex items-center justify-between text-left hover:text-white focus:outline-none"
+                className="flex items-center justify-between text-left focus:outline-none hover:text-white"
               >
                 <span>Work</span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
+                  className={`h-4 w-4 transition-transform ${
                     mobileWorkOpen ? 'rotate-180' : 'rotate-0'
                   }`}
                 />
               </button>
               {mobileWorkOpen && (
-                <div className="flex flex-col space-y-2 mt-2 pl-4 text-sm">
-                  <Link href="/work/music" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                <div className="mt-2 flex flex-col space-y-2 pl-4 text-sm">
+                  <Link
+                    href="/work/music"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
                     Music Projects
                   </Link>
-                  <Link href="/work/film" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                  <Link
+                    href="/work/film"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
                     Film Scoring
                   </Link>
-                  <Link href="/work/commercial" onClick={() => setMenuOpen(false)} className="hover:text-white">
+                  <Link
+                    href="/work/commercial"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
                     Commercials
                   </Link>
                 </div>
               )}
             </div>
 
-            <Link href="#services" onClick={() => setMenuOpen(false)} className="hover:text-white">
+            <Link
+              href="#services"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
               Services
             </Link>
-            <Link href="#about" onClick={() => setMenuOpen(false)} className="hover:text-white">
-              about us
+            <Link
+              href="#about"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              About&nbsp;Us
             </Link>
 
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 border border-white px-4 py-2 rounded text-center font-semibold hover:bg-white hover:text-black transition duration-200"
+              className="mt-2 rounded border border-white px-4 py-2 text-center font-semibold transition duration-200 hover:bg-white hover:text-black"
             >
-              Contact Us
+              Contact&nbsp;Us
             </Link>
           </div>
         </div>
       )}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

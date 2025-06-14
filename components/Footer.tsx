@@ -54,7 +54,7 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Get It Touch</h4>
             <p className="mb-4 leading-relaxed">
-              Stay connected with me and let's know more about my service
+              Stay connected with me and Lets&apos;s know more about my service
             </p>
             <Link
               href="/contact"

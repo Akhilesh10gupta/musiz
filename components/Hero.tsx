@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'          // ← removed unused useState
 import { motion, useCycle } from 'framer-motion'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
-import Image from 'next/image'
+// import Image from 'next/image'               // ← removed; not used
 
 /**
  * Enhanced Hero section
@@ -22,7 +22,12 @@ export default function Hero() {
 
   const handleToggle = () => {
     if (!audioRef.current) return
-    isPlaying ? audioRef.current.pause() : audioRef.current.play()
+    // eslint-disable-next-line no-lonely-if
+    if (isPlaying) {
+      audioRef.current.pause()
+    } else {
+      audioRef.current.play()
+    }
     toggle()
   }
 
@@ -65,11 +70,15 @@ export default function Hero() {
       >
         <h1 className="text-4xl sm:text-6xl xl:text-8xl font-extrabold leading-tight text-black">
           Your next big<br />
-          project <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">awaits!</span>
+          project&nbsp;
+          <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            awaits!
+          </span>
         </h1>
 
         <p className="mt-6 text-lg sm:text-xl text-gray-800/90">
-          We’re on with your hustle journey, through our<br />comprehensive sound and music production services.
+          We’re on with your hustle journey, through our<br />comprehensive sound and music
+          production services.
         </p>
 
         <motion.a
@@ -99,7 +108,7 @@ export default function Hero() {
           alt="Vinyl"
           animate={{ rotate: isPlaying ? 360 : 0, y: [0, -6, 0] }}
           transition={{ repeat: Infinity, repeatType: 'loop', ease: 'linear', duration: 8 }}
-          className="relative w-full h-full object-contain rounded-full shadow-2xl"
+          className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
 
         {/* control button */}
@@ -107,8 +116,8 @@ export default function Hero() {
           onClick={handleToggle}
           className="absolute inset-0 flex items-center justify-center focus:outline-none"
         >
-          <span className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-500 hover:bg-blue-600 text-white rounded-full
-                           flex items-center justify-center shadow-lg transition-colors">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg
+                           transition-colors hover:bg-blue-600 sm:h-20 sm:w-20">
             {isPlaying ? <BsPauseFill size={28} /> : <BsFillPlayFill size={28} />}
           </span>
         </button>

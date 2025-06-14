@@ -51,7 +51,7 @@ const ServiceCard: React.FC<Service> = ({ title, desc, Icon }) => (
       className="text-blue-400 mb-2 transition-colors duration-300 group-hover:text-white"
     />
     <h3 className="text-lg font-semibold tracking-wide text-white">{title}</h3>
-    <p className="text-sm leading-relaxed text-gray-300">{desc}</p>
+    <p className="text-sm leading-relaxed text-white ">{desc}</p>
   </motion.div>
 )
 
@@ -59,32 +59,32 @@ export default function Services() {
   const services: Service[] = [
     {
       title: 'Video Production',
-      desc: 'Compelling ads that grab attention, tell your story, and leave a lasting impact.',
+      desc: 'Craft impactful videos that captivate audiences and leave a lasting mark.',
       Icon: MdTv,
     },
     {
       title: 'Music Production',
-      desc: 'From brainstorming to scripting—craft stories that resonate and bring visions to life.',
+      desc: 'Shape your sound with precision—melodies that move, inspire, and connect.',
       Icon: MdLibraryMusic,
     },
     {
       title: 'Creation & Designs',
-      desc: 'High‑performing ads designed to engage, convert, and drive measurable results.',
+      desc: 'Turn bold ideas into striking visuals that engage, persuade, and convert.',
       Icon: MdTrendingUp,
     },
     {
       title: 'Photography & Videography',
-      desc: 'Simplify complex product features into engaging videos that are impossible to resist.',
+      desc: 'Capture powerful moments and product stories with stunning visual detail.',
       Icon: MdVideoLibrary,
     },
     {
       title: 'Animation & Motion Graphics',
-      desc: 'Showcase your company’s values and impact with powerful stories that matter.',
+      desc: 'Add life to your message with bold, dynamic motion and storytelling.',
       Icon: MdBusiness,
     },
     {
       title: 'Distribution',
-      desc: 'Turn real customer experiences into compelling stories that build trust and value.',
+      desc: 'Share your story across the right channels to build trust and drive value',
       Icon: MdStarRate,
     },
   ]

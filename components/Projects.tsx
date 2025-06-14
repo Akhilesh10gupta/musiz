@@ -108,7 +108,7 @@ export default function Projects() {
               />
               <button
                 onClick={() => setActive(null)}
-                className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-blue-500 text-white text-xl font-bold hover:bg-blue-600"
+                className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-blue-400 text-white text-xl font-bold hover:bg-blue-600"
               >
                 ✕
               </button>

@@ -31,8 +31,8 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden sm:flex items-center space-x-6 text-sm uppercase font-light tracking-wide relative">
-          <Link href="/">Home</Link>
-          <Link href="/projects" className="hover:text-gray-300">Projects</Link>
+          <Link href="/" className='font-semibold hover:text-blue-400'>Home</Link>
+          <Link href="#projects"  className="hover:text-blue-400 font-semibold">Projects</Link>
 
           {/* WORK Menu with Hover Dropdown */}
           <div
@@ -47,8 +47,8 @@ const Header = () => {
               }, 200);
             }}
           >
-            <button className="flex items-center hover:text-gray-300 cursor-pointer focus:outline-none">
-              <span>WORK</span>
+            <button className="flex items-center hover:text-blue-400 cursor-pointer focus:outline-none">
+              <span className='font-semibold'>WORK</span>
               <ChevronDown className="w-4 h-4 ml-1" />
             </button>
 
@@ -87,8 +87,8 @@ const Header = () => {
             )}
           </div>
 
-          <Link href="/services" className="hover:text-gray-300">Services</Link>
-          <Link href="/about" className="hover:text-gray-300">About Us</Link>
+          <Link href="#services" className="hover:text-blue-500 font-semibold">Services</Link>
+          <Link href="/about" className="hover:text-blue-500 font-semibold">About Us</Link>
         </nav>
 
         {/* Desktop Contact Button */}

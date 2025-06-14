@@ -5,14 +5,13 @@ import { motion, useCycle } from 'framer-motion'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
 
 /**
- * Enhanced Hero section
+ * Hero Section – Vercel‑safe
  * --------------------------------------------------
- * - Larger, gradient headline
- * - Floating sparkles (subtle parallax)
- * - Vinyl has glow & gentle bob animation
- * - Play / pause SVG icons (react‑icons)
- * - Gradient CTA button
- * - **New:** pulsing / ping effect on play‑pause button so users know it’s clickable
+ * ✅ "use client" directive is first (required in Next JS app directory)
+ * ✅ No server‑only APIs (window / document) outside click handler
+ * ✅ Framer Motion props typed correctly (keyframes arrays for loops)
+ * ✅ Transition.repeat uses finite number (Infinity → 9999) to satisfy TS
+ * ✅ Assets expected under /public (music.mp3, vinyl.png)
  * --------------------------------------------------
  */
 
@@ -21,8 +20,16 @@ export default function Hero() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const handleToggle = () => {
-    if (!audioRef.current) return
-    isPlaying ? audioRef.current.pause() : audioRef.current.play()
+    const audio = audioRef.current
+    if (!audio) return
+
+    /* Safeguard for browsers that block autoplay */
+    if (isPlaying) {
+      audio.pause()
+    } else {
+      // play() can return a Promise – ignore errors (user gesture already happened)
+      void audio.play().catch(() => {})
+    }
     toggle()
   }
 
@@ -39,21 +46,21 @@ export default function Hero() {
       {/* floating sparkles */}
       {[...Array(8)].map((_, i) => (
         <motion.div
+          // eslint-disable-next-line react/no-array-index-key
           key={i}
           className="absolute w-1.5 h-1.5 bg-white rounded-full"
           initial={{ opacity: 0, scale: 0 }}
-          animate={{
-            opacity: [0, 0.8, 0],
-            scale: [0, 1, 0],
-            y: [0, -40],
-            x: [0, 20]
-          }}
-          transition={{ repeat: Infinity, duration: 6 + i, delay: i * 0.7, ease: 'easeInOut' }}
+          animate={{ opacity: [0, 0.8, 0], scale: [0, 1, 0], y: [0, -40], x: [0, 20] }}
+          transition={{ repeat: 9999, duration: 6 + i, delay: i * 0.7, ease: 'easeInOut' }}
           style={{ top: `${20 + i * 10}%`, left: `${10 + i * 12}%` }}
         />
       ))}
 
       {/* hidden audio */}
+      {/*
+        Place music.mp3 in /public so that it resolves to /music.mp3 at build time.
+        Vercel treats /public as the web root – no import required.
+      */}
       <audio ref={audioRef} src="/music.mp3" preload="auto" />
 
       {/* Text block */}
@@ -101,20 +108,21 @@ export default function Hero() {
         <motion.img
           src="/vinyl.png"
           alt="Vinyl"
-          animate={{ rotate: isPlaying ? 360 : 0, y: [0, -6, 0] }}
-          transition={{ repeat: Infinity, repeatType: 'loop', ease: 'linear', duration: 8 }}
+          animate={{ rotate: isPlaying ? [0, 360] : [0], y: [0, -6, 0] }}
+          transition={{ repeat: isPlaying ? 9999 : 0, repeatType: 'loop', ease: 'linear', duration: 8 }}
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
 
-        {/* control button –– now with pulse / ping effect */}
+        {/* control button – pulse + ping */}
         <motion.button
           onClick={handleToggle}
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.05, 1] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+          transition={{ repeat: 9999, duration: 1.8, ease: 'easeInOut' }}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
           className="absolute inset-0 flex items-center justify-center focus:outline-none"
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
           {/* ping ring appears only when music is paused – subtly invites users to click */}
           {!isPlaying && (

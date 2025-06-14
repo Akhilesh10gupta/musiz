@@ -1,16 +1,14 @@
-import React from 'react'
-import { Button } from "@/components/ui/button"
-import Container from '@/components/Container'
-import Hero from '@/components/Hero'
+import Container from '@/components/Layouts/Container';
+import Hero from '@/components/Pages/Hero';
 
 const Home = () => {
   return (
-    <Container className='bg-black max-w-full' >
-      <Hero/>
-      
-      
-    </Container>
-  )
-}
+    <div className="bg-black">
+      <Container className="max-w-full p-0">
+        <Hero />
+      </Container>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

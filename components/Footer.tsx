@@ -58,7 +58,7 @@ const Footer = () => {
             </p>
             <Link
               href="/contact"
-              className="bg-gray-600 hover:bg-gray-700 text-white font-bold uppercase py-3 px-6 rounded-lg inline-block text-center transition"
+              className="bg-blue-400 hover:bg-white text-white hover:text-black font-bold uppercase py-3 px-6 rounded-lg inline-block text-center transition"
             >
               Contact Us
             </Link>
@@ -68,7 +68,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row items-center justify-between text-xs">
           <p className="text-gray-400">
-            © <span className="text-yellow-500 font-medium">SiR Musiz</span> 2025 all rights reserved
+            © <span className="text-blue-400 font-medium">SiR Musiz</span> 2025 all rights reserved
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>

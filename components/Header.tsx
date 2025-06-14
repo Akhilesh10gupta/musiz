@@ -88,13 +88,13 @@ const Header = () => {
           </div>
 
           <Link href="#services" className="hover:text-blue-500 font-semibold">Services</Link>
-          <Link href="/about" className="hover:text-blue-500 font-semibold">About Us</Link>
+          <Link href="#about" className="hover:text-blue-500 font-semibold">About Us</Link>
         </nav>
 
         {/* Desktop Contact Button */}
         <Link
           href="/contact"
-          className="hidden sm:inline-block border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition duration-200"
+          className="hidden font-semibold sm:inline-block border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition duration-200"
         >
           Contact Us
         </Link>
@@ -116,7 +116,7 @@ const Header = () => {
             <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-white">
               Home
             </Link>
-            <Link href="/projects" onClick={() => setMenuOpen(false)} className="text-white ">
+            <Link href="#projects" onClick={() => setMenuOpen(false)} className="text-white ">
               Projects
             </Link>
 
@@ -148,10 +148,10 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/services" onClick={() => setMenuOpen(false)} className="hover:text-white">
+            <Link href="#services" onClick={() => setMenuOpen(false)} className="hover:text-white">
               Services
             </Link>
-            <Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-white">
+            <Link href="#about" onClick={() => setMenuOpen(false)} className="hover:text-white">
               about us
             </Link>
 

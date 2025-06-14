@@ -76,9 +76,9 @@ export default function Projects() {
         href="https://www.youtube.com/@SiRMusizProduction"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-12 inline-block px-8 py-3 rounded-full bg-blue-500 font-semibold hover:bg-blue-600 transition-colors"
+        className="mt-12 inline-block px-8 py-3 rounded-full bg-blue-400 font-semibold hover:bg-blue-600 transition-colors"
       >
-        More Videos →
+        More projects →
       </a>
 
       {/* ───────── modal player ───────── */}

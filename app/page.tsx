@@ -4,6 +4,7 @@ import Container from '@/components/Container'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
 import Projects from '@/components/Projects'
+import About from '@/components/aboutus'
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
       <Hero/>
       <Projects/>
       <Services />
-      
+      <About/>
     </Container>
   )
 }

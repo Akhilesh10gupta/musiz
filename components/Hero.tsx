@@ -1,16 +1,17 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useMemo } from 'react'
 import { motion, useCycle } from 'framer-motion'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
 
 export default function Hero() {
-  /* ─────────── particle canvas ─────────── */
+  /* ───────────────── canvas ───────────────── */
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
+    if (!canvasRef.current || typeof window === 'undefined') return
+
     const canvas = canvasRef.current
-    if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -27,7 +28,7 @@ export default function Hero() {
     setSize()
 
     const colors = ['#8B5CF6', '#06B6D4', '#F59E0B']
-    const COUNT = isMobile ? 20 : 50
+    const COUNT = isMobile ? 12 : 50
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -38,7 +39,13 @@ export default function Hero() {
       color: colors[Math.floor(Math.random() * colors.length)],
     }))
 
+    let skipFrame = false
     const step = () => {
+      if (isMobile && (skipFrame = !skipFrame)) {
+        requestAnimationFrame(step)
+        return
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       particles.forEach((p, i) => {
@@ -82,23 +89,25 @@ export default function Hero() {
     return () => window.removeEventListener('resize', setSize)
   }, [])
 
-  /* ─────────── audio / vinyl logic ─────────── */
+  /* ───────────────── vinyl / audio ───────────────── */
   const [isPlaying, toggle] = useCycle(false, true)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const handleToggle = () => {
     const audio = audioRef.current
     if (!audio) return
-
-    if (isPlaying) {
-      audio.pause()
-    } else {
-      audio.play().catch(() => {})
-    }
-    toggle() // ← eslint-safe now
+    if (isPlaying) audio.pause()
+    else void audio.play().catch(() => {})
+    toggle()
   }
 
-  /* ─────────── markup (unchanged) ─────────── */
+  /* ───────────────── helpers ───────────────── */
+  const sparkles = useMemo(() => {
+    if (typeof window === 'undefined') return 8 // SSR fallback
+    return window.matchMedia('(max-width: 640px)').matches ? 4 : 8
+  }, [])
+
+  /* ───────────────── markup ───────────────── */
   return (
     <section
       id="hero"
@@ -112,8 +121,9 @@ export default function Hero() {
       <div className="absolute -bottom-48 -right-48 w-[560px] h-[560px] bg-indigo-600/20 rounded-full blur-[120px]" />
 
       {/* sparkles */}
-      {[...Array(8)].map((_, i) => (
+      {[...Array(sparkles)].map((_, i) => (
         <motion.div
+          // eslint-disable-next-line react/no-array-index-key
           key={i}
           className="absolute w-1.5 h-1.5 bg-white rounded-full"
           initial={{ opacity: 0, scale: 0 }}

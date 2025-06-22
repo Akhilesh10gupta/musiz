@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import {
   MdVideoLibrary,
@@ -9,7 +9,6 @@ import {
   MdAnimation,
   MdShare,
 } from 'react-icons/md'
-import Image from 'next/image'
 
 /* smoother spring animation */
 const cardVariants = {

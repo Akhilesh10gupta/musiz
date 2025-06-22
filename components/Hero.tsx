@@ -14,23 +14,20 @@ export default function Hero() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    /* detect mobile */
     const isMobile = window.matchMedia('(max-width: 640px)').matches
+    const dpr = isMobile ? 1 : window.devicePixelRatio || 1
 
-    /* fit canvas & use lower DPR on mobile */
-    const dpr   = isMobile ? 1 : window.devicePixelRatio || 1
     const setSize = () => {
-      canvas.width  = window.innerWidth  * dpr
+      canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
-      canvas.style.width  = `${window.innerWidth}px`
+      canvas.style.width = `${window.innerWidth}px`
       canvas.style.height = `${window.innerHeight}px`
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0) // scale drawing ops
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
     setSize()
 
-    /* particles */
     const colors = ['#8B5CF6', '#06B6D4', '#F59E0B']
-    const COUNT  = isMobile ? 20 : 50          // ⬅️ fewer on phones
+    const COUNT = isMobile ? 20 : 50
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -47,7 +44,7 @@ export default function Hero() {
       particles.forEach((p, i) => {
         p.x += p.vx
         p.y += p.vy
-        if (p.x < 0 || p.x > window.innerWidth)  p.vx *= -1
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1
         if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1
 
         ctx.save()
@@ -58,13 +55,10 @@ export default function Hero() {
         ctx.fill()
         ctx.restore()
 
-        /* draw connections only on desktop */
         if (!isMobile) {
           for (let j = i + 1; j < particles.length; j++) {
             const o = particles[j]
-            const dx = p.x - o.x
-            const dy = p.y - o.y
-            const dist = Math.hypot(dx, dy)
+            const dist = Math.hypot(p.x - o.x, p.y - o.y)
             if (dist < 100) {
               ctx.save()
               ctx.globalAlpha = (100 - dist) / 100 * 0.2
@@ -88,15 +82,20 @@ export default function Hero() {
     return () => window.removeEventListener('resize', setSize)
   }, [])
 
-  /* ─────────── audio/vinyl logic (unchanged) ─────────── */
+  /* ─────────── audio / vinyl logic ─────────── */
   const [isPlaying, toggle] = useCycle(false, true)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const handleToggle = () => {
     const audio = audioRef.current
     if (!audio) return
-    isPlaying ? audio.pause() : void audio.play().catch(() => {})
-    toggle()
+
+    if (isPlaying) {
+      audio.pause()
+    } else {
+      audio.play().catch(() => {})
+    }
+    toggle() // ← eslint-safe now
   }
 
   /* ─────────── markup (unchanged) ─────────── */
@@ -124,10 +123,10 @@ export default function Hero() {
         />
       ))}
 
-      {/* hidden audio */}
+      {/* audio element */}
       <audio ref={audioRef} src="/music.mp3" preload="auto" />
 
-      {/* text */}
+      {/* text block */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -164,6 +163,7 @@ export default function Hero() {
         className="relative w-64 h-64 sm:w-80 sm:h-80 xl:w-[23rem] xl:h-[23rem]"
       >
         <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+
         <motion.img
           src="/vinyl.png"
           alt="Vinyl"
@@ -171,6 +171,7 @@ export default function Hero() {
           transition={{ repeat: isPlaying ? 9999 : 0, repeatType: 'loop', ease: 'linear', duration: 8 }}
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
+
         <motion.button
           onClick={handleToggle}
           initial={{ scale: 1 }}

@@ -95,10 +95,7 @@ export default function Services() {
       className="relative min-h-screen flex flex-col items-center justify-center
                  py-20 px-6 text-center overflow-hidden"
     >
-      {/* centered logo */}
-      {/* <div className="relative z-10 mb-4">
-        <Image src="/logo.png" alt="Logo" width={80} height={80} className="mx-auto" />
-      </div> */}
+  
 
       <h2 className="relative z-10 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-wider mb-14">
         Explore&nbsp;<span className="text-blue-400">Our Services</span>

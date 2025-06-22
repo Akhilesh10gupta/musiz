@@ -1,13 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
-  MdTv,
-  MdLibraryMusic,
-  MdTrendingUp,
   MdVideoLibrary,
-  MdBusiness,
-  MdStarRate,
+  MdLibraryMusic,
+  MdDesignServices,
+  MdCameraAlt,
+  MdAnimation,
+  MdShare,
 } from 'react-icons/md'
 import Image from 'next/image'
 
@@ -60,7 +60,7 @@ export default function Services() {
     {
       title: 'Video Production',
       desc: 'Craft impactful videos that captivate audiences and leave a lasting mark.',
-      Icon: MdTv,
+      Icon: MdVideoLibrary,
     },
     {
       title: 'Music Production',
@@ -70,22 +70,22 @@ export default function Services() {
     {
       title: 'Creation & Designs',
       desc: 'Turn bold ideas into striking visuals that engage, persuade, and convert.',
-      Icon: MdTrendingUp,
+      Icon: MdDesignServices,
     },
     {
       title: 'Photography & Videography',
       desc: 'Capture powerful moments and product stories with stunning visual detail.',
-      Icon: MdVideoLibrary,
+      Icon: MdCameraAlt,
     },
     {
       title: 'Animation & Motion Graphics',
       desc: 'Add life to your message with bold, dynamic motion and storytelling.',
-      Icon: MdBusiness,
+      Icon: MdAnimation,
     },
     {
       title: 'Distribution',
       desc: 'Share your story across the right channels to build trust and drive value',
-      Icon: MdStarRate,
+      Icon: MdShare,
     },
   ]
 
@@ -96,9 +96,9 @@ export default function Services() {
                  py-20 px-6 text-center overflow-hidden"
     >
       {/* centered logo */}
-      <div className="relative z-10 mb-4">
+      {/* <div className="relative z-10 mb-4">
         <Image src="/logo.png" alt="Logo" width={80} height={80} className="mx-auto" />
-      </div>
+      </div> */}
 
       <h2 className="relative z-10 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-wider mb-14">
         Explore&nbsp;<span className="text-blue-400">Our Services</span>

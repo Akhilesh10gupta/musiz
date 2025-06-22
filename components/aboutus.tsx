@@ -1,16 +1,11 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'   // ← icon
 
-/* --------------------------------------------------
- * About Section — Light Teal‑Cyan‑Blue Theme
- * --------------------------------------------------
- * • Glassy team carousel that pauses on hover
- * • Text & elements tuned for light gradient background
- * -------------------------------------------------- */
-
+/* fade-in utility (unchanged) */
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
@@ -21,19 +16,30 @@ const fadeUp = {
 }
 
 const TEAM = [
-  { name: 'Ava Beats', role: 'Audio Engineer', img: '/team/member1.jpg' },
-  { name: 'DJ Sonic', role: 'Mixing Artist', img: '/team/member2.jpg' },
-  { name: 'Luna Vox', role: 'Vocal Producer', img: '/team/member3.jpg' },
-  { name: 'Echo Ray', role: 'Video Editor', img: '/team/member4.jpg' },
+  { name: 'Ava Beats', role: 'Audio Engineer', img: '/team/member1.jpg' },
+  { name: 'DJ Sonic', role: 'Mixing Artist',  img: '/team/member2.jpg' },
+  { name: 'Luna Vox', role: 'Vocal Producer', img: '/team/member3.jpg' },
+  { name: 'Echo Ray', role: 'Video Editor',   img: '/team/member4.jpg' },
 ]
 
 export default function About() {
+  /* like state keyed by index */
+  const [likes, setLikes] = useState<Record<number, boolean>>({})
+
+  const toggleLike = (idx: number) => {
+    setLikes(prev => ({ ...prev, [idx]: !prev[idx] }))
+    /* auto-revert after 3 s if turned on */
+    if (!likes[idx]) {
+      setTimeout(() => setLikes(prev => ({ ...prev, [idx]: true })), 3000)
+    }
+  }
+
   return (
     <section
       id="about"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 py-32 overflow-hidden text-gray-800 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50"
     >
-      {/* Ambient Blobs */}
+      {/* ambient blobs (unchanged) */}
       <motion.div
         className="absolute -top-48 -left-48 w-[680px] h-[680px] bg-teal-300/40 rounded-full blur-[140px]"
         animate={{ scale: [1, 1.25, 1] }}
@@ -46,7 +52,7 @@ export default function About() {
       />
 
       <div className="relative z-10 max-w-6xl w-full">
-        {/* Heading */}
+        {/* heading + intro (unchanged) */}
         <motion.h2
           variants={fadeUp}
           initial="hidden"
@@ -60,7 +66,6 @@ export default function About() {
           </span>
         </motion.h2>
 
-        {/* Intro Paragraph */}
         <motion.p
           variants={fadeUp}
           custom={1}
@@ -69,40 +74,42 @@ export default function About() {
           viewport={{ once: true }}
           className="mx-auto max-w-3xl text-center text-lg sm:text-xl text-gray-700 leading-relaxed mb-16"
         >
-          SiR Musiz is a creative haven where sonic innovation meets soulful storytelling. Our crew turns raw ideas into immersive audio‑visual experiences.
+          SiR Musiz is a creative haven where sonic innovation meets soulful storytelling. Our crew turns raw ideas into immersive audio-visual experiences.
         </motion.p>
 
-        {/* ─── Team Carousel ─── */}
+        {/* ─── TEAM CAROUSEL ─── */}
         <div className="group relative w-full overflow-x-hidden py-4">
           <motion.div
             className="flex gap-12 animate-scroll select-none"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+            transition={{ duration: 15, ease: 'linear', repeat: Infinity }} 
           >
             {[...TEAM, ...TEAM].map((member, idx) => (
               <div
                 key={idx}
-                className="min-w-[240px] max-w-[240px] flex-shrink-0 bg-white/60 backdrop-blur-lg border border-white/70 rounded-3xl p-6 text-center shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover: shadow-[0_8px_40px_rgba(0,150,255,0.25)] hover:scale-105 transition-transform duration-300"
+                className="relative min-w-[240px] max-w-[240px] flex-shrink-0 bg-white/60 backdrop-blur-lg border border-white/70 rounded-3xl p-6 text-center transition-transform duration-300 hover:scale-105"
               >
+                {/* profile */}
                 <div className="relative w-36 h-36 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-white/70 shadow-lg">
                   <Image src={member.img} alt={member.name} fill sizes="144px" className="object-cover" />
                 </div>
-                <h4 className="font-semibold text-lg text-gray-900">
-                  {member.name}
-                </h4>
-                <p className="text-sm text-gray-700">
-                  {member.role}
-                </p>
+                <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
+                <p className="text-sm text-gray-700">{member.role}</p>
+
+                {/* like button */}
+                <button
+                  onClick={() => toggleLike(idx)}
+                  className="absolute top-4 right-4 text-xl text-teal-500 hover:text-pink-500 transition-colors"
+                  aria-label="like profile"
+                >
+                  {likes[idx] ? <AiFillHeart /> : <AiOutlineHeart />}
+                </button>
               </div>
             ))}
           </motion.div>
-
-          {/* Gradient fade edges */}
-          <span className="pointer-events-none absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-blue-50 via-white/80 to-transparent" />
-          <span className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-blue-50 via-white/80 to-transparent" />
         </div>
 
-        {/* CTA Button */}
+        {/* CTA (unchanged) */}
         <div className="flex justify-center mt-20">
           <motion.a
             href="/contact"
@@ -121,13 +128,13 @@ export default function About() {
         </div>
       </div>
 
-      {/* ─── Local CSS for scroll & pause ─── */}
+      {/* GLOBAL CSS (faster scroll, no side fades) */}
       <style jsx global>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        .animate-scroll { animation: scroll 30s linear infinite; }
+        .animate-scroll { animation: scroll 15s linear infinite; }
         .group:hover .animate-scroll { animation-play-state: paused; }
       `}</style>
     </section>

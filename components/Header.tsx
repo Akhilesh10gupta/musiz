@@ -51,7 +51,7 @@ const Header: React.FC = () => {
           <Link href="/" className="font-semibold hover:text-blue-400">
             Home
           </Link>
-          <Link href="#projects" className="font-semibold hover:text-blue-400">
+          <Link href="/Projects" className="font-semibold hover:text-blue-400">
             Projects
           </Link>
 
@@ -135,7 +135,7 @@ const Header: React.FC = () => {
               Home
             </Link>
             <Link
-              href="#projects"
+              href="/Projects"
               onClick={() => setMenuOpen(false)}
               className="text-white"
             >

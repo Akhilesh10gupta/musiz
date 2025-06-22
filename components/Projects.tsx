@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
 const videos = [
   { title: 'Addictive Eyes', description: 'Sir Musiz studio.', videoId: 'SkZWB3LDURk' },
@@ -72,14 +73,13 @@ export default function Projects() {
       </motion.div>
 
       {/* more button */}
-      <a
-        href="https://www.youtube.com/@SiRMusizProduction"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-12 inline-block px-8 py-3 rounded-full bg-blue-400 font-semibold hover:bg-blue-600 transition-colors"
+      <Link
+        href="/Projects"                      // ✔ internal route   (folder: app/Projects/page.tsx)
+        className="mt-12 inline-block px-8 py-3 rounded-full bg-blue-400 font-semibold
+                   hover:bg-blue-600 transition-colors"
       >
         More projects →
-      </a>
+      </Link>
 
       {/* ───────── modal player ───────── */}
       <AnimatePresence>

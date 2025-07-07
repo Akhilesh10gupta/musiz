@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import type { Variants } from 'framer-motion' // ✅ type import
-import Slider from 'react-slick'
+import type { Variants } from 'framer-motion'
+import Slider from './SlickNoSSR' // 🔄 Dynamic import to fix SSR hydration issue
 import Image from 'next/image'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import 'slick-carousel/slick/slick.css'
@@ -100,7 +100,8 @@ export default function About() {
           viewport={{ once: true }}
           className="mx-auto max-w-3xl text-center text-lg sm:text-xl text-gray-700 leading-relaxed mb-16"
         >
-          SiR Musiz is a creative haven where sonic innovation meets soulful storytelling. Our crew turns raw ideas into immersive audio-visual experiences.
+          SiR Musiz is a creative haven where sonic innovation meets soulful storytelling.
+          Our crew turns raw ideas into immersive audio-visual experiences.
         </motion.p>
 
         {/* carousel */}

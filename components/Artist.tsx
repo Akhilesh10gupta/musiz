@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { memo, useCallback, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { memo, useRef, useState } from 'react'
 import Container from './Container' // ✅ using Container wrapper
 
 /* ---------- Artist Data ---------- */
@@ -115,7 +115,6 @@ GridCard.displayName = 'GridCard'
 
 /* ---------- Main Section ---------- */
 export default function ArtistsSection() {
-  const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [active, setActive] = useState(0)

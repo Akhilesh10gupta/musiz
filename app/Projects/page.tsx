@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'   // ← added AnimatePresence
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface Project {
   id: number
@@ -12,7 +12,6 @@ interface Project {
   youtubeId: string
 }
 
-/* demo data — swap for real rows */
 const projects: Project[] = [
   { id: 1, title: 'Studio Anthem', creator: 'SiR Musiz', category: 'Music Production', description: 'Atmospheric beat session.', youtubeId: 'SkZWB3LDURk' },
   { id: 2, title: 'Visualizer Drop', creator: 'AD Rapstar', category: 'Video Production', description: 'Official track visualizer.', youtubeId: 'puqYqs0tDPg' },
@@ -33,40 +32,33 @@ const categories = [
 export default function ProjectsPage() {
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')
-  const [active, setActive]   = useState<Project | null>(null)   // ← new
+  const [active, setActive] = useState<Project | null>(null)
 
-  /* ------------ filter logic ------------ */
   const visible = projects.filter(p => {
-    const cOK =
-      category.trim().toLowerCase() === 'all' ||
-      p.category.toLowerCase() === category.toLowerCase()
+    const cOK = category === 'All' || p.category === category
     const q = query.trim().toLowerCase()
-    const qOK =
-      q === '' ||
-      p.title.toLowerCase().includes(q) ||
-      p.creator.toLowerCase().includes(q)
+    const qOK = p.title.toLowerCase().includes(q) || p.creator.toLowerCase().includes(q)
     return cOK && qOK
   })
 
-  /* ------------ ui ------------ */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 text-black px-4 py-24">
+    <motion.div
+      className="min-h-screen bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 text-black px-4 py-24"
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       <div className="max-w-6xl mx-auto">
 
-        {/* headline */}
+        {/* heading */}
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">All Projects</h1>
-          <p className="text-lg text-gray-600">
-            Music, visuals, graphics & AI explorations from Sir Musiz.
-          </p>
+          <p className="text-lg text-gray-600">Music, visuals, graphics & AI explorations from SiR Musiz.</p>
         </div>
 
-        {/* ------------- FILTER BAR ------------- */}
-        <div
-          className="rounded-3xl border border-teal-200/60 bg-white/60 backdrop-blur-md shadow-inner
-                     flex flex-wrap gap-4 items-center justify-between px-6 py-5 mb-14"
-        >
-          {/* search */}
+        {/* filter */}
+        <div className="rounded-3xl border border-teal-200/60 bg-white/60 backdrop-blur-md shadow-inner
+                        flex flex-wrap gap-4 items-center justify-between px-6 py-5 mb-14">
           <input
             type="text"
             placeholder="Search title or creator…"
@@ -77,42 +69,43 @@ export default function ProjectsPage() {
                        focus:outline-none bg-white/70"
           />
 
-          {/* category pills */}
           <div className="flex flex-wrap gap-3">
             {categories.map(c => (
               <motion.button
                 key={c}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setCategory(c)
-                  // keep query
-                }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setCategory(c)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all
-                  ${
-                    category === c
-                      ?  'bg-gradient-to-r from-blue-400 to-teal-400 text-white shadow-lg'
-                    : 'bg-blue-200 text-gray-700 border-black hover:border-blue-400'
-                  }`}
+                  ${category === c
+                    ? 'bg-gradient-to-r from-blue-400 to-teal-400 text-white shadow-lg'
+                    : 'bg-blue-200 text-gray-700 hover:border-blue-400'}`}
               >
                 {c}
               </motion.button>
             ))}
           </div>
         </div>
-        {/* ----------- END FILTER BAR ----------- */}
 
         {/* grid */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.08 } },
+          }}
         >
           {visible.map(v => (
             <motion.div
               key={v.id}
               whileHover={{ scale: 1.03 }}
-              onClick={() => setActive(v)}                    /* ← open modal */
+              whileTap={{ scale: 0.97 }}
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }
+              }}
+              onClick={() => setActive(v)}
               className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl overflow-hidden shadow-md group cursor-pointer"
             >
               <div className="aspect-video overflow-hidden">
@@ -141,7 +134,7 @@ export default function ProjectsPage() {
         )}
       </div>
 
-      {/* ───────── FULLSCREEN MODAL ───────── */}
+      {/* MODAL */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -177,6 +170,6 @@ export default function ProjectsPage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }

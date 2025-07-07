@@ -139,7 +139,7 @@ export default function Contact() {
               </span>
               <div className="text-left">
                 <p className="font-semibold text-blue-400">Location</p>
-                <p className="text-black text-sm">123 Anywhere St., Any City</p>
+                <p className="text-black text-sm">123 Gorakhpur., Uttar-Praddesh, India</p>
               </div>
             </li>
           </ul>

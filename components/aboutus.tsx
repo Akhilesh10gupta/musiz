@@ -1,12 +1,16 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion' // ✅ type import
+import Slider from 'react-slick'
 import Image from 'next/image'
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'   // ← icon
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-/* fade-in utility (unchanged) */
-const fadeUp = {
+// ✅ Type-safe animation variant
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
     opacity: 1,
@@ -17,21 +21,43 @@ const fadeUp = {
 
 const TEAM = [
   { name: 'Ava Beats', role: 'Audio Engineer', img: '/team/member1.jpg' },
-  { name: 'DJ Sonic', role: 'Mixing Artist',  img: '/team/member2.jpg' },
+  { name: 'DJ Sonic', role: 'Mixing Artist', img: '/team/member2.jpg' },
   { name: 'Luna Vox', role: 'Vocal Producer', img: '/team/member3.jpg' },
-  { name: 'Echo Ray', role: 'Video Editor',   img: '/team/member4.jpg' },
+  { name: 'Echo Ray', role: 'Video Editor', img: '/team/member4.jpg' },
 ]
 
 export default function About() {
-  /* like state keyed by index */
   const [likes, setLikes] = useState<Record<number, boolean>>({})
 
   const toggleLike = (idx: number) => {
     setLikes(prev => ({ ...prev, [idx]: !prev[idx] }))
-    /* auto-revert after 3 s if turned on */
     if (!likes[idx]) {
       setTimeout(() => setLikes(prev => ({ ...prev, [idx]: true })), 3000)
     }
+  }
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   }
 
   return (
@@ -39,7 +65,7 @@ export default function About() {
       id="about"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 py-32 overflow-hidden text-gray-800 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50"
     >
-      {/* ambient blobs (unchanged) */}
+      {/* ambient blobs */}
       <motion.div
         className="absolute -top-48 -left-48 w-[680px] h-[680px] bg-teal-300/40 rounded-full blur-[140px]"
         animate={{ scale: [1, 1.25, 1] }}
@@ -52,7 +78,7 @@ export default function About() {
       />
 
       <div className="relative z-10 max-w-6xl w-full">
-        {/* heading + intro (unchanged) */}
+        {/* heading */}
         <motion.h2
           variants={fadeUp}
           initial="hidden"
@@ -77,39 +103,37 @@ export default function About() {
           SiR Musiz is a creative haven where sonic innovation meets soulful storytelling. Our crew turns raw ideas into immersive audio-visual experiences.
         </motion.p>
 
-        {/* ─── TEAM CAROUSEL ─── */}
-        <div className="group relative w-full overflow-x-hidden py-4">
-          <motion.div
-            className="flex gap-12 animate-scroll select-none"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 15, ease: 'linear', repeat: Infinity }} 
-          >
-            {[...TEAM, ...TEAM].map((member, idx) => (
-              <div
-                key={idx}
-                className="relative min-w-[240px] max-w-[240px] flex-shrink-0 bg-white/60 backdrop-blur-lg border border-white/70 rounded-3xl p-6 text-center transition-transform duration-300 hover:scale-105"
-              >
-                {/* profile */}
-                <div className="relative w-36 h-36 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-white/70 shadow-lg">
-                  <Image src={member.img} alt={member.name} fill sizes="144px" className="object-cover" />
+        {/* carousel */}
+        <div className="relative z-10">
+          <Slider {...settings}>
+            {TEAM.map((member, idx) => (
+              <div key={idx} className="px-3">
+                <div className="relative bg-white/60 backdrop-blur-lg border border-white/70 rounded-3xl p-6 text-center transition-transform duration-300 hover:scale-105">
+                  <div className="relative w-36 h-36 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-white/70 shadow-lg">
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      fill
+                      sizes="144px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
+                  <p className="text-sm text-gray-700">{member.role}</p>
+                  <button
+                    onClick={() => toggleLike(idx)}
+                    className="absolute top-4 right-4 text-xl text-teal-500 hover:text-pink-500 transition-colors"
+                    aria-label="like profile"
+                  >
+                    {likes[idx] ? <AiFillHeart /> : <AiOutlineHeart />}
+                  </button>
                 </div>
-                <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
-                <p className="text-sm text-gray-700">{member.role}</p>
-
-                {/* like button */}
-                <button
-                  onClick={() => toggleLike(idx)}
-                  className="absolute top-4 right-4 text-xl text-teal-500 hover:text-pink-500 transition-colors"
-                  aria-label="like profile"
-                >
-                  {likes[idx] ? <AiFillHeart /> : <AiOutlineHeart />}
-                </button>
               </div>
             ))}
-          </motion.div>
+          </Slider>
         </div>
 
-        {/* CTA (unchanged) */}
+        {/* call to action */}
         <div className="flex justify-center mt-20">
           <motion.a
             href="/contact"
@@ -128,14 +152,14 @@ export default function About() {
         </div>
       </div>
 
-      {/* GLOBAL CSS (faster scroll, no side fades) */}
+      {/* hide arrows on small screens */}
       <style jsx global>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        @media (max-width: 1023px) {
+          .slick-prev,
+          .slick-next {
+            display: none !important;
+          }
         }
-        .animate-scroll { animation: scroll 15s linear infinite; }
-        .group:hover .animate-scroll { animation-play-state: paused; }
       `}</style>
     </section>
   )

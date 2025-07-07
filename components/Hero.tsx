@@ -1,10 +1,16 @@
 'use client'
 
-import React, { useRef, useEffect, useMemo } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { motion, useCycle } from 'framer-motion'
 import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
 
 export default function Hero() {
+  /* ───────────────── mounted flag ───────────────── */
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   /* ───────────────── canvas ───────────────── */
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
@@ -87,7 +93,7 @@ export default function Hero() {
 
     window.addEventListener('resize', setSize)
     return () => window.removeEventListener('resize', setSize)
-  }, [])
+  }, [mounted])
 
   /* ───────────────── vinyl / audio ───────────────── */
   const [isPlaying, toggle] = useCycle(false, true)
@@ -101,13 +107,18 @@ export default function Hero() {
     toggle()
   }
 
-  /* ───────────────── helpers ───────────────── */
-  const sparkles = useMemo(() => {
-    if (typeof window === 'undefined') return 8 // SSR fallback
-    return window.matchMedia('(max-width: 640px)').matches ? 4 : 8
+  /* ───────────────── sparkles ───────────────── */
+  const [sparkles, setSparkles] = useState(8)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.matchMedia('(max-width: 640px)').matches
+      setSparkles(isMobile ? 4 : 8)
+    }
   }, [])
 
-  /* ───────────────── markup ───────────────── */
+  /* ───────────────── avoid SSR mismatch ───────────────── */
+  if (!mounted) return null
+
   return (
     <section
       id="hero"
@@ -123,12 +134,11 @@ export default function Hero() {
       {/* sparkles */}
       {[...Array(sparkles)].map((_, i) => (
         <motion.div
-          // eslint-disable-next-line react/no-array-index-key
           key={i}
           className="absolute w-1.5 h-1.5 bg-white rounded-full"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: [0, 0.8, 0], scale: [0, 1, 0], y: [0, -40], x: [0, 20] }}
-          transition={{ repeat: 9999, duration: 6 + i, delay: i * 0.7, ease: 'easeInOut' }}
+          transition={{ repeat: Infinity, duration: 6 + i, delay: i * 0.7, ease: 'easeInOut' }}
           style={{ top: `${20 + i * 10}%`, left: `${10 + i * 12}%` }}
         />
       ))}
@@ -178,7 +188,7 @@ export default function Hero() {
           src="/vinyl.png"
           alt="Vinyl"
           animate={{ rotate: isPlaying ? [0, 360] : [0], y: [0, -6, 0] }}
-          transition={{ repeat: isPlaying ? 9999 : 0, repeatType: 'loop', ease: 'linear', duration: 8 }}
+          transition={{ repeat: isPlaying ? Infinity : 0, repeatType: 'loop', ease: 'linear', duration: 8 }}
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
 
@@ -186,7 +196,7 @@ export default function Hero() {
           onClick={handleToggle}
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.05, 1] }}
-          transition={{ repeat: 9999, duration: 1.8, ease: 'easeInOut' }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
           className="absolute inset-0 flex items-center justify-center focus:outline-none"

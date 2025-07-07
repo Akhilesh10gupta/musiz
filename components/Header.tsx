@@ -65,7 +65,7 @@ const Header: React.FC = () => {
             onMouseLeave={startHoverTimeout}
           >
             <button className="flex cursor-pointer items-center focus:outline-none hover:text-blue-400">
-              <span className="font-semibold">Work</span>
+              <span className="font-semibold">WORK</span>
               <ChevronDown className="ml-1 h-4 w-4" />
             </button>
 
@@ -148,7 +148,7 @@ const Header: React.FC = () => {
                 onClick={toggleMobileWork}
                 className="flex items-center justify-between text-left focus:outline-none hover:text-white"
               >
-                <span>Work</span>
+                <span>WORK</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
                     mobileWorkOpen ? 'rotate-180' : 'rotate-0'

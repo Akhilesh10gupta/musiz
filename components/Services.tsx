@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import {
   MdVideoLibrary,
   MdLibraryMusic,
@@ -11,7 +11,7 @@ import {
 } from 'react-icons/md'
 
 /* smoother spring animation */
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 60 },
   show: {
     opacity: 1,
@@ -21,7 +21,8 @@ const cardVariants = {
 }
 
 /* stagger container */
-const container = {
+const container: Variants = {
+  hidden: {},
   show: { transition: { staggerChildren: 0.15 } },
 }
 
@@ -39,7 +40,10 @@ const ServiceCard: React.FC<Service> = ({ title, desc, Icon }) => (
     viewport={{ once: true, amount: 0.3 }}
     whileHover={{
       y: -4,
-      transition: { duration: 0.25, ease: 'easeInOut' },
+      transition: {
+        duration: 0.25,
+        ease: [0.42, 0, 0.58, 1], // Cubic bezier instead of string to avoid type error
+      },
     }}
     className="group rounded-3xl border border-white/10 bg-black/25 backdrop-blur-sm
                p-8 flex flex-col items-center text-center gap-4 cursor-pointer
@@ -50,7 +54,7 @@ const ServiceCard: React.FC<Service> = ({ title, desc, Icon }) => (
       className="text-blue-400 mb-2 transition-colors duration-300 group-hover:text-white"
     />
     <h3 className="text-lg font-semibold tracking-wide text-white">{title}</h3>
-    <p className="text-sm leading-relaxed text-white ">{desc}</p>
+    <p className="text-sm leading-relaxed text-white">{desc}</p>
   </motion.div>
 )
 
@@ -94,8 +98,6 @@ export default function Services() {
       className="relative min-h-screen flex flex-col items-center justify-center
                  py-20 px-6 text-center overflow-hidden"
     >
-  
-
       <h2 className="relative z-10 text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-wider mb-14">
         Explore&nbsp;<span className="text-blue-400">Our Services</span>
       </h2>

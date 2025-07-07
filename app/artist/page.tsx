@@ -2,8 +2,12 @@
 
 import { motion, useInView } from 'framer-motion'
 import { memo, useRef, useState } from 'react'
+import Slider from 'react-slick'
 import Container from '../../components/Container'
 import { ARTISTS, Artist } from '@/lib/data/artists'
+
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const colour = (c: Artist['color']) =>
   c === 'purple'
@@ -34,21 +38,17 @@ const NavItem = memo(({ artist, active, onClick }: { artist: Artist; active: boo
 })
 NavItem.displayName = 'NavItem'
 
-const GridCard = memo(({ artist, onClick }: { artist: Artist; onClick: () => void }) => {
+const GridCard = memo(({ artist }: { artist: Artist }) => {
   const c = colour(artist.color)
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      onClick={onClick}
-      className={`rounded-3xl border ${c.b} bg-white/30 backdrop-blur p-5 sm:p-6 cursor-pointer shadow-md hover:shadow-xl transition-transform`}
-    >
+    <div className={`rounded-3xl border ${c.b} bg-white/30 backdrop-blur p-5 sm:p-6 shadow-md`}>
       <div className="text-center">
-        <div className="text-4xl sm:text-5xl mb-2 sm:mb-3 hover:animate-spin duration-500">{artist.image}</div>
+        <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">{artist.image}</div>
         <h3 className="font-bold text-base sm:text-lg">{artist.name}</h3>
         <p className={`${c.t} text-xs sm:text-sm mb-1 sm:mb-2`}>{artist.genre}</p>
         <div className="text-xs text-neutral-700">{artist.achievement}</div>
       </div>
-    </motion.div>
+    </div>
   )
 })
 GridCard.displayName = 'GridCard'
@@ -61,6 +61,27 @@ export default function ArtistsPage() {
   const current = ARTISTS[active] ?? ARTISTS[0]
   const show = { opacity: 1, y: 0 }
   const hide = { opacity: 0, y: 40 }
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2 }
+      },
+      {
+        breakpoint: 640,
+        settings: { slidesToShow: 1 }
+      }
+    ],
+    arrows: false
+  }
 
   return (
     <section
@@ -115,17 +136,15 @@ export default function ArtistsPage() {
         <motion.div
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.1 } },
-          }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
         >
-          {ARTISTS.map((a, i) => (
-            <motion.div key={a.name} variants={{ hidden: hide, show }} transition={{ duration: 0.5 }}>
-              <GridCard artist={a} onClick={() => setActive(i)} />
-            </motion.div>
-          ))}
+          <Slider {...settings}>
+            {ARTISTS.map((artist) => (
+              <div key={artist.name} className="px-2">
+                <GridCard artist={artist} />
+              </div>
+            ))}
+          </Slider>
         </motion.div>
       </Container>
     </section>

@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { Variants } from 'framer-motion'
 
 interface Project {
   id: number
@@ -30,14 +29,15 @@ const categories = [
   'AI Content',
 ]
 
-const cardVariants: Variants = {
+// 🛠 Fix: removed explicit type to avoid type conflict on `ease`
+const cardVariants = {
   hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1],
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
     },
   },
 }
@@ -62,11 +62,15 @@ export default function ProjectsPage() {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div className="max-w-6xl mx-auto">
+        {/* Heading */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">All Projects</h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            All Projects
+          </h1>
           <p className="text-lg text-gray-600">Music, visuals, graphics & AI explorations from SiR Musiz.</p>
         </div>
 
+        {/* Filter */}
         <div className="rounded-3xl border border-teal-200/60 bg-white/60 backdrop-blur-md shadow-inner
                         flex flex-wrap gap-4 items-center justify-between px-6 py-5 mb-14">
           <input
@@ -78,7 +82,6 @@ export default function ProjectsPage() {
                        rounded-2xl placeholder-gray-400 focus:ring-2 focus:ring-blue-400/40
                        focus:outline-none bg-white/70"
           />
-
           <div className="flex flex-wrap gap-3">
             {categories.map(c => (
               <motion.button
@@ -96,6 +99,7 @@ export default function ProjectsPage() {
           </div>
         </div>
 
+        {/* Grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -131,6 +135,7 @@ export default function ProjectsPage() {
           ))}
         </motion.div>
 
+        {/* Empty state */}
         {visible.length === 0 && (
           <div className="text-center py-20 text-gray-500">
             <div className="text-5xl mb-4">🔍</div>
@@ -139,6 +144,7 @@ export default function ProjectsPage() {
         )}
       </div>
 
+      {/* Modal */}
       <AnimatePresence>
         {active && (
           <motion.div

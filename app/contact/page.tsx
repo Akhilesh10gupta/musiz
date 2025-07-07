@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import {
   MdEmail,
   MdPhone,
@@ -8,10 +8,14 @@ import {
   MdLocationOn,
 } from 'react-icons/md'
 
-/* hero‑style fade‑up */
-const fade = {
+// ✅ Fix: Explicit Variants type compatible with Framer Motion
+const fade: Variants = {
   hidden: { opacity: 0, y: 60 },
-  show:   { opacity: 1, y: 0, transition: { duration: 1.2, ease: 'easeOut' } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }, // replaced 'easeOut' with cubic-bezier
+  },
 }
 
 export default function Contact() {
@@ -22,17 +26,15 @@ export default function Contact() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="relative min-h-screen flex items-center justify-center py-24 px-6
-                 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-24 px-6 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 overflow-hidden"
     >
       {/* shared blur circles */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-800 opacity-20 rounded-full blur-3xl z-0" />
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-indigo-600 opacity-20 rounded-full blur-3xl z-0" />
 
       {/* glass card */}
-      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 p-12
-                      bg-white/10 backdrop-blur-md rounded-3xl border border-white/10 shadow-lg">
-        {/* ─────────── Left: Form ─────────── */}
+      <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 p-12 bg-white/10 backdrop-blur-md rounded-3xl border border-white/10 shadow-lg">
+        {/* ───────── Left: Form ───────── */}
         <form className="flex flex-col gap-6 pr-0 md:pr-8">
           <h3 className="text-3xl font-bold text-black mb-2">Fill the form</h3>
 
@@ -63,14 +65,13 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="self-start mt-2 px-6 py-3 bg-white text-black font-semibold
-                       rounded-md shadow hover:bg-blue-400 hover:text-white transition"
+            className="self-start mt-2 px-6 py-3 bg-white text-black font-semibold rounded-md shadow hover:bg-blue-400 hover:text-white transition"
           >
             Submit
           </button>
         </form>
 
-        {/* ─────────── Right: Info ─────────── */}
+        {/* ───────── Right: Info ───────── */}
         <div className="mt-12 md:mt-0 md:pl-8 flex flex-col gap-8">
           <h2 className="text-5xl font-extrabold text-blue-400">Get in Touch.</h2>
           <p className="text-black leading-relaxed">
@@ -83,63 +84,63 @@ export default function Contact() {
           <ul className="space-y-5">
             {/* Email */}
             <li className="flex items-center gap-4">
-                <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
+              <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
                 <MdEmail size={24} />
-                </span>
-                <div className="text-left">
+              </span>
+              <div className="text-left">
                 <p className="font-semibold text-blue-400">Email</p>
                 <a
-                    href="mailto:studiosirmusiz@gmail.com"
-                    className="text-black text-sm no-underline hover:text-blue-600 transition "
+                  href="mailto:studiosirmusiz@gmail.com"
+                  className="text-black text-sm no-underline hover:text-blue-600 transition"
                 >
-                    studiosirmusiz@gmail.com
+                  studiosirmusiz@gmail.com
                 </a>
-                </div>
+              </div>
             </li>
 
             {/* Website */}
             <li className="flex items-center gap-4">
-                <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
+              <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
                 <MdLanguage size={24} />
-                </span>
-                <div className="text-left">
+              </span>
+              <div className="text-left">
                 <p className="font-semibold text-blue-400">Website</p>
                 <a
-                    href="https://sirmusizstudios.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black text-sm no-underline hover:text-blue-600 transition"
+                  href="https://sirmusizstudios.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black text-sm no-underline hover:text-blue-600 transition"
                 >
-                    sirmusizstudios.com
+                  sirmusizstudios.com
                 </a>
-                </div>
+              </div>
             </li>
 
             {/* Phone */}
             <li className="flex items-center gap-4">
-                <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
+              <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
                 <MdPhone size={24} />
-                </span>
-                <div className="text-left">
+              </span>
+              <div className="text-left">
                 <p className="font-semibold text-blue-400">Phone</p>
                 <a
-                    href="tel:+918467898698"
-                    className="text-black text-sm no-underline hover:text-blue-600 transition"
+                  href="tel:+918467898698"
+                  className="text-black text-sm no-underline hover:text-blue-600 transition"
                 >
-                    +91 84678 98698
+                  +91 84678 98698
                 </a>
-                </div>
+              </div>
             </li>
 
-            {/* Location (keep as is, or integrate with Google Maps) */}
+            {/* Location */}
             <li className="flex items-center gap-4">
-                <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
+              <span className="p-3 bg-blue-400/20 text-blue-400 rounded-lg">
                 <MdLocationOn size={24} />
-                </span>
-                <div className="text-left">
+              </span>
+              <div className="text-left">
                 <p className="font-semibold text-blue-400">Location</p>
                 <p className="text-black text-sm">123 Anywhere St., Any City</p>
-                </div>
+              </div>
             </li>
           </ul>
         </div>

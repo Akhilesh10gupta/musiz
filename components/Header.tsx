@@ -97,6 +97,9 @@ const Header: React.FC = () => {
             )}
           </div>
 
+          <Link href="/artist" className="font-semibold hover:text-blue-500">
+            Artist
+          </Link>
           <Link href="/#services" className="font-semibold hover:text-blue-500">
             Services
           </Link>
@@ -182,6 +185,13 @@ const Header: React.FC = () => {
               )}
             </div>
 
+            <Link
+              href="/artist"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              Artist
+            </Link>
             <Link
               href="/#services"
               onClick={() => setMenuOpen(false)}

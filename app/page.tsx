@@ -5,6 +5,7 @@ import Services from '@/components/Services'
 import Projects from '@/components/Projects'
 import About from '@/components/aboutus'
 
+
 const Home = () => {
   return (
     <Container className='bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50 max-w-full' >

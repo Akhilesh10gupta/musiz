@@ -1,23 +1,38 @@
 'use client'
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import Link from 'next/link'
 
 const videos = [
   { title: 'Addictive Eyes', description: 'Sir Musiz studio.', videoId: 'SkZWB3LDURk' },
-  { title: 'Hanju(Official)',        description: 'Official Music Visualizer.', videoId: 'puqYqs0tDPg' },
-  { title: 'Missing You (Official Audio)',      description: 'AD Rapstar', videoId: 'f5m5Nd50LZI' },
-  { title: 'Heartstrings',      description: '(Official Visualizer) - AD Rapstar.',      videoId: 'iHpMRAJWRhQ' },
-  { title: 'Feeling Lonely',             description: 'Neel D X AD Rapstar .',  videoId: 'QcOK7L9jopU' },
-  { title: 'Cant See You',           description: 'R Jxy x AD Rapstar .', videoId: 'Cqhd4om5kjk' },
+  { title: 'Hanju(Official)', description: 'Official Music Visualizer.', videoId: 'puqYqs0tDPg' },
+  { title: 'Missing You (Official Audio)', description: 'AD Rapstar', videoId: 'f5m5Nd50LZI' },
+  { title: 'Heartstrings', description: '(Official Visualizer) - AD Rapstar.', videoId: 'iHpMRAJWRhQ' },
+  { title: 'Feeling Lonely', description: 'Neel D X AD Rapstar.', videoId: 'QcOK7L9jopU' },
+  { title: 'Cant See You', description: 'R Jxy x AD Rapstar.', videoId: 'Cqhd4om5kjk' },
 ]
 
-const cardVar = {
+// ✅ Fix: use easing array instead of string
+const cardVar: Variants = {
   hidden: { opacity: 0, y: 40 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.42, 0, 0.58, 1], // equivalent to easeInOut
+    },
+  },
 }
 
-const gridVar = { show: { transition: { staggerChildren: 0.2 } } }
+const gridVar: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+}
 
 export default function Projects() {
   const [active, setActive] = useState<null | typeof videos[0]>(null)
@@ -25,7 +40,8 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen py-20 px-6 flex flex-col items-center  text-white scroll-mt-20">
+      className="relative min-h-screen py-20 px-6 flex flex-col items-center text-white scroll-mt-20"
+    >
       {/* heading */}
       <div className="mb-12 text-center">
         <h2 className="text-4xl sm:text-5xl text-black font-bold tracking-tight mb-2">
@@ -44,7 +60,7 @@ export default function Projects() {
         viewport={{ once: true }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full"
       >
-        {videos.map(v => (
+        {videos.map((v, idx) => (
           <motion.div
             key={v.videoId}
             variants={cardVar}
@@ -52,17 +68,17 @@ export default function Projects() {
             className="group cursor-pointer relative rounded-3xl overflow-hidden
                        border border-white/10 bg-black/25 backdrop-blur-sm shadow-xl"
           >
-            {/* thumbnail via embed (no autoplay) */}
             <div className="aspect-video">
               <iframe
                 src={`https://www.youtube.com/embed/${v.videoId}?rel=0&modestbranding=1`}
-                title={v.title}
+                title={`${v.title}-${idx}`} // ✅ unique title
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full pointer-events-none transition-transform duration-500 group-hover:scale-105"
               />
             </div>
 
-            {/* hover overlay */}
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100
                             transition-opacity duration-300 flex flex-col justify-end p-6">
               <h3 className="text-lg font-bold">{v.title}</h3>
@@ -74,14 +90,14 @@ export default function Projects() {
 
       {/* more button */}
       <Link
-        href="/Projects"                      // ✔ internal route   (folder: app/Projects/page.tsx)
+        href="/Projects"
         className="mt-12 inline-block px-8 py-3 rounded-full bg-blue-400 font-semibold
                    hover:bg-blue-600 transition-colors"
       >
         More projects →
       </Link>
 
-      {/* ───────── modal player ───────── */}
+      {/* modal */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -96,14 +112,15 @@ export default function Projects() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
               transition={{ type: 'spring', stiffness: 100, damping: 18 }}
-              onClick={e => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
               className="relative w-[90vw] max-w-4xl aspect-video"
             >
               <iframe
                 src={`https://www.youtube.com/embed/${active.videoId}?autoplay=1&rel=0&modestbranding=1`}
-                title={active.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                title={`modal-${active.title}`}
+                allow="autoplay; encrypted-media; fullscreen"
                 allowFullScreen
+                loading="lazy"
                 className="w-full h-full rounded-xl"
               />
               <button

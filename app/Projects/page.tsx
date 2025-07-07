@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 
 interface Project {
   id: number
@@ -29,6 +30,18 @@ const categories = [
   'AI Content',
 ]
 
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+}
+
 export default function ProjectsPage() {
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')
@@ -49,14 +62,11 @@ export default function ProjectsPage() {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div className="max-w-6xl mx-auto">
-
-        {/* heading */}
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">All Projects</h1>
           <p className="text-lg text-gray-600">Music, visuals, graphics & AI explorations from SiR Musiz.</p>
         </div>
 
-        {/* filter */}
         <div className="rounded-3xl border border-teal-200/60 bg-white/60 backdrop-blur-md shadow-inner
                         flex flex-wrap gap-4 items-center justify-between px-6 py-5 mb-14">
           <input
@@ -86,7 +96,6 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -101,10 +110,7 @@ export default function ProjectsPage() {
               key={v.id}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }
-              }}
+              variants={cardVariants}
               onClick={() => setActive(v)}
               className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl overflow-hidden shadow-md group cursor-pointer"
             >
@@ -125,7 +131,6 @@ export default function ProjectsPage() {
           ))}
         </motion.div>
 
-        {/* empty state */}
         {visible.length === 0 && (
           <div className="text-center py-20 text-gray-500">
             <div className="text-5xl mb-4">🔍</div>
@@ -134,7 +139,6 @@ export default function ProjectsPage() {
         )}
       </div>
 
-      {/* MODAL */}
       <AnimatePresence>
         {active && (
           <motion.div

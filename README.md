@@ -45,11 +45,13 @@ npm install
 
 # Run locally in development mode
 npm run dev
-
+```
 
 ---
-**## Project Structure**
----
+
+## 📂 Project Structure
+
+```
 musiz/
 ├── src/
 │   ├── components/       # Reusable UI components
@@ -61,7 +63,7 @@ musiz/
 ├── package.json
 └── tailwind.config.js
 
-
+```
 📬 Contact
 
 Developer: Akhilesh Gupta

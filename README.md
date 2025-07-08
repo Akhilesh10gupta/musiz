@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎵 Musiz – Music Streaming & Discovery Platform
 
-## Getting Started
+[![Live Site](https://img.shields.io/badge/Live%20Frontend-blue?style=flat-square&logo=vercel)](https://sirmusiz.vercel.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-First, run the development server:
+**Musiz** is a modern music streaming and discovery web application that allows users to browse, search, and listen to songs and playlists. It features a responsive UI, intuitive player controls, and seamless integration with music APIs for a smooth listening experience.
+
+---
+
+## 🌐 Live Demo
+
+- Visit the live app here: [sirmusiz.vercel.app](https://sirmusiz.vercel.app/)
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS
+- **State Management**: Context API
+- **Data Fetching**: Axios / Fetch API
+- **Deployment**: Vercel
+
+---
+
+## 📦 Features
+
+- 🔍 Browse and search songs, artists, and albums
+- ▶️ Play, pause, and skip tracks with a floating music player
+- 📃 View song details, album art, and artist info
+- 📱 Fully responsive design for both desktop and mobile
+- 🌙 Dark/light theme toggle (if included)
+- ❤️ Like/unlike tracks and manage playlists
+
+---
+
+## ⚙️ Setup & Installation
 
 ```bash
+# Clone the repo
+git clone https://github.com/Akhilesh10gupta/musiz.git
+cd musiz
+
+# Install dependencies
+npm install
+
+# Run locally in development mode
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
+**## Project Structure**
+---
+musiz/
+├── src/
+│   ├── components/       # Reusable UI components
+│   ├── context/          # Global state & theme context
+│   ├── pages/            # Page-level views
+│   ├── api/              # API request logic
+│   ├── assets/           # Images, icons, styles
+├── public/               # Static assets
+├── package.json
+└── tailwind.config.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+📬 Contact
 
-To learn more about Next.js, take a look at the following resources:
+Developer: Akhilesh Gupta
+📧 Email: gakhilesh946@gmail.com
+🌐 GitHub: @Akhilesh10gupta
+🔗 LinkedIn: Akhilesh Gupta
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📄 License
+This project is licensed under the MIT License.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You can now copy this entire content and paste it into a `README.md` file inside your project folder. Let me know if you’d like to include screenshots or a walkthrough video later!

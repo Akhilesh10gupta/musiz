@@ -64,17 +64,11 @@ musiz/
 └── tailwind.config.js
 
 ```
-📬 Contact
-
-Developer: Akhilesh Gupta
-📧 Email: gakhilesh946@gmail.com
-🌐 GitHub: @Akhilesh10gupta
-🔗 LinkedIn: Akhilesh Gupta
-
-📄 License
-This project is licensed under the MIT License.
-
-
 ---
 
-You can now copy this entire content and paste it into a `README.md` file inside your project folder. Let me know if you’d like to include screenshots or a walkthrough video later!
+## 📬 Contact
+
+**Developer**: Akhilesh Gupta  
+📧 Email: gakhilesh946@gmail.com  
+🌐 GitHub: [@Akhilesh10gupta](https://github.com/Akhilesh10gupta)  
+🔗 LinkedIn: [Akhilesh Gupta](https://www.linkedin.com/in/akhilesh-gupta-826067228/)

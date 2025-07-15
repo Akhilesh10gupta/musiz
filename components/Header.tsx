@@ -129,7 +129,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       <AnimatePresence>
-        {menuOpen && (
+      {menuOpen && (
           <motion.div
             key="mobile-menu"
             initial={{ opacity: 0, y: -20 }}
@@ -138,91 +138,91 @@ const Header: React.FC = () => {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="px-4 pt-4 sm:hidden"
           >
-            <div className="flex flex-col space-y-5 rounded-lg bg-[#1c1c1c] p-6 text-sm uppercase font-light tracking-wide text-gray-300 shadow-xl">
-              <Link
-                href="/"
-                onClick={() => setMenuOpen(false)}
-                className="hover:text-white"
+          <div className="flex flex-col space-y-5 rounded-lg bg-[#1c1c1c] p-6 text-sm uppercase font-light tracking-wide text-gray-300 shadow-xl">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              Home
+            </Link>
+            <Link
+              href="/Projects"
+              onClick={() => setMenuOpen(false)}
+              className="text-white"
+            >
+              Projects
+            </Link>
+            {/* Mobile Work submenu */}
+            <div className="flex flex-col">
+              <button
+                onClick={toggleMobileWork}
+                className="flex items-center justify-between text-left focus:outline-none hover:text-white"
               >
-                Home
-              </Link>
-              <Link
-                href="/Projects"
-                onClick={() => setMenuOpen(false)}
-                className="text-white"
-              >
-                Projects
-              </Link>
-              {/* Mobile Work submenu */}
-              <div className="flex flex-col">
-                <button
-                  onClick={toggleMobileWork}
-                  className="flex items-center justify-between text-left focus:outline-none hover:text-white"
-                >
-                  <span>WORK</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      mobileWorkOpen ? 'rotate-180' : 'rotate-0'
-                    }`}
-                  />
-                </button>
-                {mobileWorkOpen && (
-                  <div className="mt-2 flex flex-col space-y-2 pl-4 text-sm">
-                    <Link
-                      href="/work/music"
-                      onClick={() => setMenuOpen(false)}
-                      className="hover:text-white"
-                    >
-                      Music Projects
-                    </Link>
-                    <Link
-                      href="/work/film"
-                      onClick={() => setMenuOpen(false)}
-                      className="hover:text-white"
-                    >
-                      Film Scoring
-                    </Link>
-                    <Link
-                      href="/work/commercial"
-                      onClick={() => setMenuOpen(false)}
-                      className="hover:text-white"
-                    >
-                      Commercials
-                    </Link>
-                  </div>
-                )}
-              </div>
-              <Link
-                href="/artist"
-                onClick={() => setMenuOpen(false)}
-                className="hover:text-white"
-              >
-                Artist
-              </Link>
-              <Link
-                href="/#services"
-                onClick={() => setMenuOpen(false)}
-                className="hover:text-white"
-              >
-                Services
-              </Link>
-              <Link
-                href="/#about"
-                onClick={() => setMenuOpen(false)}
-                className="hover:text-white"
-              >
-                About&nbsp;Us
-              </Link>
-              <Link
-                href="/contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 rounded border border-white px-4 py-2 text-center font-semibold transition duration-200 hover:bg-white hover:text-black"
-              >
-                Contact&nbsp;Us
-              </Link>
+                <span>WORK</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${
+                    mobileWorkOpen ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
+              </button>
+              {mobileWorkOpen && (
+                <div className="mt-2 flex flex-col space-y-2 pl-4 text-sm">
+                  <Link
+                    href="/work/music"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
+                    Music Projects
+                  </Link>
+                  <Link
+                    href="/work/film"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
+                    Film Scoring
+                  </Link>
+                  <Link
+                    href="/work/commercial"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-white"
+                  >
+                    Commercials
+                  </Link>
+                </div>
+              )}
             </div>
+            <Link
+              href="/artist"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              Artist
+            </Link>
+            <Link
+              href="/#services"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              Services
+            </Link>
+            <Link
+              href="/#about"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-white"
+            >
+              About&nbsp;Us
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-2 rounded border border-white px-4 py-2 text-center font-semibold transition duration-200 hover:bg-white hover:text-black"
+            >
+              Contact&nbsp;Us
+            </Link>
+          </div>
           </motion.div>
-        )}
+      )}
       </AnimatePresence>
     </header>
   )

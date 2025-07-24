@@ -47,9 +47,6 @@ export default function EkartPage() {
     setCategory(cat);
     setPage(1);
   };
-  const handlePage = (p: number) => {
-    setPage(p);
-  };
 
   // Pagination logic for showing only two page numbers
   let pageNumbers = [];

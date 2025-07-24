@@ -3,21 +3,21 @@ import React, { useState } from 'react';
 
 // Mock music sample data with categories
 const musicSamples = [
-  { id: 1, title: 'Electric Guitar Chords - Fire', genre: 'Hip Hop, Soul', bpm: 130, key: 'F min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b7.mp3', category: 'Guitar' },
-  { id: 2, title: 'Guitar Loop - Escape Stack', genre: 'Rock, Indie', bpm: 153, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b8.mp3', category: 'Guitar' },
-  { id: 3, title: 'Muted Funk Riff', genre: 'Funk, Disco', bpm: 112, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b9.mp3', category: 'Guitar' },
-  { id: 4, title: 'Piano Chill Melody', genre: 'Chill, Lo-fi', bpm: 90, key: 'C maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c0.mp3', category: 'Piano' },
-  { id: 5, title: 'Trap Beat', genre: 'Trap, Hip Hop', bpm: 140, key: 'A min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c1.mp3', category: 'Beats' },
-  { id: 6, title: 'Jazz Sax Groove', genre: 'Jazz', bpm: 110, key: 'Bb maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c2.mp3', category: 'Saxophone' },
-  { id: 7, title: 'EDM Drop', genre: 'EDM', bpm: 128, key: 'G min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c3.mp3', category: 'Beats' },
-  { id: 8, title: 'Classical Strings', genre: 'Classical', bpm: 100, key: 'D maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c4.mp3', category: 'Strings' },
-  { id: 9, title: 'Pop Vocal Sample', genre: 'Pop', bpm: 120, key: 'E maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c5.mp3', category: 'Vocals' },
-  { id: 10, title: 'Ambient Pad', genre: 'Ambient', bpm: 80, key: 'G maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c6.mp3', category: 'Synth' },
-  { id: 11, title: 'Rock Drum Loop', genre: 'Rock', bpm: 110, key: 'A min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c7.mp3', category: 'Drums' },
-  { id: 12, title: 'Funky Bassline', genre: 'Funk', bpm: 115, key: 'C min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c8.mp3', category: 'Bass' },
-  { id: 13, title: 'Latin Percussion', genre: 'Latin', bpm: 105, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c9.mp3', category: 'Percussion' },
-  { id: 14, title: 'Hip Hop Vocal Chop', genre: 'Hip Hop', bpm: 95, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d0.mp3', category: 'Vocals' },
-  { id: 15, title: 'Synthwave Lead', genre: 'Synthwave', bpm: 100, key: 'B min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d1.mp3', category: 'Synth' },
+  { id: 1, title: 'Electric Guitar Chords - Fire', genre: 'Hip Hop, Soul', bpm: 130, key: 'F min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b7.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample1' },
+  { id: 2, title: 'Guitar Loop - Escape Stack', genre: 'Rock, Indie', bpm: 153, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b8.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample2' },
+  { id: 3, title: 'Muted Funk Riff', genre: 'Funk, Disco', bpm: 112, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b9.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample3' },
+  { id: 4, title: 'Piano Chill Melody', genre: 'Chill, Lo-fi', bpm: 90, key: 'C maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c0.mp3', category: 'Piano', gumroadUrl: 'https://gumroad.com/l/sample4' },
+  { id: 5, title: 'Trap Beat', genre: 'Trap, Hip Hop', bpm: 140, key: 'A min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c1.mp3', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample5' },
+  { id: 6, title: 'Jazz Sax Groove', genre: 'Jazz', bpm: 110, key: 'Bb maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c2.mp3', category: 'Saxophone', gumroadUrl: 'https://gumroad.com/l/sample6' },
+  { id: 7, title: 'EDM Drop', genre: 'EDM', bpm: 128, key: 'G min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c3.mp3', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample7' },
+  { id: 8, title: 'Classical Strings', genre: 'Classical', bpm: 100, key: 'D maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c4.mp3', category: 'Strings', gumroadUrl: 'https://gumroad.com/l/sample8' },
+  { id: 9, title: 'Pop Vocal Sample', genre: 'Pop', bpm: 120, key: 'E maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c5.mp3', category: 'Vocals', gumroadUrl: 'https://gumroad.com/l/sample9' },
+  { id: 10, title: 'Ambient Pad', genre: 'Ambient', bpm: 80, key: 'G maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c6.mp3', category: 'Synth', gumroadUrl: 'https://gumroad.com/l/sample10' },
+  { id: 11, title: 'Rock Drum Loop', genre: 'Rock', bpm: 110, key: 'A min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c7.mp3', category: 'Drums', gumroadUrl: 'https://gumroad.com/l/sample11' },
+  { id: 12, title: 'Funky Bassline', genre: 'Funk', bpm: 115, key: 'C min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c8.mp3', category: 'Bass', gumroadUrl: 'https://gumroad.com/l/sample12' },
+  { id: 13, title: 'Latin Percussion', genre: 'Latin', bpm: 105, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c9.mp3', category: 'Percussion', gumroadUrl: 'https://gumroad.com/l/sample13' },
+  { id: 14, title: 'Hip Hop Vocal Chop', genre: 'Hip Hop', bpm: 95, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d0.mp3', category: 'Vocals', gumroadUrl: 'https://gumroad.com/l/sample14' },
+  { id: 15, title: 'Synthwave Lead', genre: 'Synthwave', bpm: 100, key: 'B min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d1.mp3', category: 'Synth', gumroadUrl: 'https://gumroad.com/l/sample15' },
 ];
 
 const categories = [
@@ -105,7 +105,7 @@ export default function EkartPage() {
               </button>
             ) : (
               <button
-                className="mt-2 px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+                className="mt-2 px-4 py-2 rounded bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
                 onClick={() => handleAddToCart(sample.id)}
               >
                 Add to Cart
@@ -162,12 +162,22 @@ export default function EkartPage() {
                     <div className="font-semibold text-blue-800">{sample.title}</div>
                     <div className="text-xs text-gray-500">{sample.category} | {sample.genre}</div>
                   </div>
-                  <button
-                    className="text-red-500 hover:underline text-sm px-3 py-1 rounded"
-                    onClick={() => handleRemoveFromCart(id)}
-                  >
-                    Remove
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      className="text-red-500 hover:underline text-sm px-3 py-1 rounded"
+                      onClick={() => handleRemoveFromCart(id)}
+                    >
+                      Remove
+                    </button>
+                    <a
+                      href={sample.gumroadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm"
+                    >
+                      Buy
+                    </a>
+                  </div>
                 </li>
               );
             })}

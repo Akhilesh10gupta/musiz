@@ -67,7 +67,7 @@ export default function EkartPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-cyan-50 to-purple-100 px-0 pb-20">
       {/* Hero Banner */}
       <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 py-16 mb-10 text-white text-center shadow-lg">
-        <h1 className="text-5xl font-extrabold mb-4 tracking-tight drop-shadow-lg">Discover & Buy Music Samples</h1>
+        <h1 className="text-5xl font-extrabold mb-2 mt-4 tracking-tight drop-shadow-lg">Discover & Buy Music Samples</h1>
         <p className="text-lg max-w-2xl mx-auto opacity-90">Browse, listen, and purchase high-quality music samples for your next project. Filter by category, preview tracks, and build your custom cart!</p>
       </div>
 
@@ -148,19 +148,25 @@ export default function EkartPage() {
 
       {/* Cart Section */}
       <div className="max-w-3xl mx-auto mt-16 bg-white/95 rounded-2xl shadow-xl p-8">
-        <h2 className="text-2xl font-bold mb-4 text-blue-900">Your Cart</h2>
+        <h2 className="text-2xl font-bold mb-4 text-blue-900 flex items-center gap-2">
+          <span>Your Cart</span>
+          <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded-full">{cart.length}</span>
+        </h2>
         {cart.length === 0 ? (
-          <div className="text-gray-500">No items in cart.</div>
+          <div className="text-gray-500 text-center py-8">No items in cart.</div>
         ) : (
-          <ul className="space-y-2">
+          <ul className="divide-y divide-blue-100">
             {cart.map((id) => {
               const sample = musicSamples.find((s) => s.id === id);
               if (!sample) return null;
               return (
-                <li key={id} className="flex justify-between items-center border-b py-2">
-                  <span className="font-semibold text-blue-800">{sample.title}</span>
+                <li key={id} className="flex justify-between items-center py-4">
+                  <div>
+                    <div className="font-semibold text-blue-800">{sample.title}</div>
+                    <div className="text-xs text-gray-500">{sample.category} | {sample.genre}</div>
+                  </div>
                   <button
-                    className="text-red-500 hover:underline text-sm"
+                    className="text-red-500 hover:underline text-sm px-3 py-1 rounded"
                     onClick={() => handleRemoveFromCart(id)}
                   >
                     Remove

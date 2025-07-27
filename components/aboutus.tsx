@@ -20,11 +20,17 @@ const fadeUp: Variants = {
 }
 
 const TEAM = [
-  { name: 'Ava Beats', role: 'Audio Engineer', img: '/team/member1.jpg' },
-  { name: 'DJ Sonic', role: 'Mixing Artist', img: '/team/member2.jpg' },
-  { name: 'Luna Vox', role: 'Vocal Producer', img: '/team/member3.jpg' },
-  { name: 'Echo Ray', role: 'Video Editor', img: '/team/member4.jpg' },
-]
+  { name: 'Shivam Kumar Gupta', role: 'Founder & Head', img: '/team/shivam.jpg' },
+  { name: 'Dilip Gupta', role: 'Manager & Finance Manager', img: '/team/male-avatar.jpg' },
+  { name: 'Shobha Madheshiya', role: 'Creative & Finance Manager', img: '/team/female-avatar.jpg' },
+  { name: 'R Jxy', role: 'Audio Engineer & Music Producer', img: '/team/male-avatar.jpg' },
+  { name: 'AD Rapstar', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },
+  { name: 'KRSH', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },
+  { name: 'Adnan', role: 'Video Editor', img: '/team/male-avatar.jpg' },
+  { name: 'Ayush', role: 'Graphics designer & Animator', img: '/team/male-avatar.jpg' },
+  { name: 'Akhilesh Gupta', role: 'Web Design Manager', img: '/team/akhilesh.jpg' },
+  { name: 'Himanshu', role: 'Customer Relationship', img: '/team/male-avatar.jpg' },
+];
 
 export default function About() {
   const [likes, setLikes] = useState<Record<number, boolean>>({})

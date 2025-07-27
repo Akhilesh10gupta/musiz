@@ -22,6 +22,10 @@ export default function Hero() {
     if (!ctx) return
 
     const isMobile = window.matchMedia('(max-width: 640px)').matches
+    // 💡 Performance: Completely disable the particle animation on mobile devices
+    // to prevent lagging and ensure a smoother experience.
+    if (isMobile) return
+
     const dpr = isMobile ? 1 : window.devicePixelRatio || 1
 
     const setSize = () => {

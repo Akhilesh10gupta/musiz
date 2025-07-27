@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 interface Project {
   id: number
@@ -9,15 +10,46 @@ interface Project {
   creator: string
   category: string
   description: string
-  youtubeId: string
+  youtubeId?: string
+  instagramUrl?: string
+  driveUrl?: string
 }
 
 const projects: Project[] = [
-  { id: 1, title: 'Studio Anthem', creator: 'SiR Musiz', category: 'Music Production', description: 'Atmospheric beat session.', youtubeId: 'SkZWB3LDURk' },
-  { id: 2, title: 'Visualizer Drop', creator: 'AD Rapstar', category: 'Video Production', description: 'Official track visualizer.', youtubeId: 'puqYqs0tDPg' },
-  { id: 3, title: 'Cartoon Bounce', creator: 'Neel D', category: 'Animation & Motion Graphics', description: 'Fun animated loop.', youtubeId: 'iHpMRAJWRhQ' },
+
+  { id: 20, title: 'Hanju R Jxy', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: '4liKhFq2QLQ' },
+  { id: 21, title: 'OPEN MESSAGE- AD RAPSTAR ', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: 'oWSAAOgXEfo' },
+  { id: 22, title: 'Dooriyan| Aun Shah', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: '_9zPtwJrFiA' },
+  { id: 23, title: 'AD RAPSTAR - UK 08 | PROD BY R JXY ', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: '4QpdNY60SS4' },
+  { id: 24, title: 'Feeling Lonely - Neel D X AD Rapstar', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: 'GDcB6rRE74s' },
+  { id: 25, title: 'HANJU | R JXY ', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: '6ofVoItZ5sw' },
+  { id: 26, title: 'Imagination - R Jxy', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: 'vIwr77d_KDM' },
+  { id: 27, title: 'ROMANTIC TALE - AUN SHAH', creator: 'SiR Musiz', category: 'Video Production', description: 'Official music video.', youtubeId: 'AylZmIeKj-Q' },
   { id: 4, title: 'Insta Promo', creator: 'Art Dept.', category: 'Poster & Social Media Post', description: 'Promo graphic timelapse.', youtubeId: 'Cqhd4om5kjk' },
-  { id: 5, title: 'AI Harmony', creator: 'Neon Nights', category: 'AI Content', description: 'AI-generated hook demo.', youtubeId: 'f5m5Nd50LZI' },
+  { id: 5, title: 'Find You', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: '1fBdoKd0jqc' },
+  { id: 6, title: 'Calm Down', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'VENmAHFggXQ' },
+  { id: 7, title: 'Laut Aa', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'h3oGa2cR-K4' },
+  { id: 8, title: 'Awara', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'rgviFUwvTG8' },
+  { id: 9, title: 'Waiting For You', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'xVOQ7AedNio' },
+  { id: 10, title: 'Flex Kare Munde', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'W_day14T880' },
+  { id: 11, title: 'Top Notch', creator: 'SiR Musiz', category: 'Animation & Motion Graphics', description: 'Dynamic motion graphics reel.', youtubeId: '4XuacguqN-8' },
+  { id: 12, title: 'Careless R-jsx', creator: 'SiR Musiz', category: 'Animation & Motion Graphics', description: 'Dynamic motion graphics reel.', youtubeId: 'LKgwIhZsdRo' },
+  { id: 13, title: 'Black Magic', creator: 'SiR Musiz', category: 'Animation & Motion Graphics', description: 'Dynamic motion graphics reel.', youtubeId: 'LlT36M0GSlA' },
+  { id: 14, title: 'Shatranj', creator: 'SiR Musiz', category: 'Animation & Motion Graphics', description: 'Dynamic motion graphics reel.', youtubeId: 'S-4rzwlWv18' },
+  { id: 15, title: 'War of Eye', creator: 'SiR Musiz', category: 'Animation & Motion Graphics', description: 'Dynamic motion graphics reel.', youtubeId: 'XJ8dPrPWiSM' },
+
+  // ✅ Instagram Reels under "Animation & Motion Graphics"
+  { id: 16, title: 'Teri Mauth', creator: 'Art Dept.', category: 'Animation & Motion Graphics', description: 'Instagram reel showcase.', instagramUrl: 'https://www.instagram.com/reel/DLewogvsAs_/embed' },
+  { id: 17, title: 'Har Afsaney', creator: 'Art Dept.', category: 'Animation & Motion Graphics', description: 'Instagram reel showcase.', instagramUrl: 'https://www.instagram.com/reel/DKSc7grMZow/embed' },
+  { id: 18, title: 'Feelinga', creator: 'Art Dept.', category: 'Animation & Motion Graphics', description: 'Instagram reel showcase.', instagramUrl: 'https://www.instagram.com/reel/DKtZM_2MbyG/embed' },
+  { id: 19, title: 'Zind Vich Meri', creator: 'Art Dept.', category: 'Animation & Motion Graphics', description: 'Instagram reel showcase.', instagramUrl: 'https://www.instagram.com/reel/DKNlpCQsbjn/embed' },
+  { id: 28, title: 'Project One', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 1.', driveUrl: 'https://drive.google.com/file/d/1ml9JXKYGT61ZzaMBMDeflkASVcmoxBZV/preview' },
+  { id: 29, title: 'Project Two', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 2.', driveUrl: 'https://drive.google.com/file/d/1b736PrBW_GA5XHeqZxFLBrB7aB5bd84J/preview' },
+  { id: 30, title: 'Project Three', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 3.', driveUrl: 'https://drive.google.com/file/d/1bHWQ8JECPA-xU6IfovSP6y8lMINwCWUh/preview' },
+  { id: 31, title: 'Project Four', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 4.', driveUrl: 'https://drive.google.com/file/d/120f4lcF3UHfJ4JC2Rx5uqaNnxtKYZs-8/preview' },
+  { id: 32, title: 'Rajkumari', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlyafWSwmO/embed' },
+  { id: 33, title: 'lifeofpaaji', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DLFmw33uk8K/embed' },
+  { id: 34, title: 'Bro Code Roast', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed' },
 ]
 
 const categories = [
@@ -29,7 +61,6 @@ const categories = [
   'AI Content',
 ]
 
-// 🛠 Fix: removed explicit type to avoid type conflict on `ease`
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
   show: {
@@ -45,7 +76,10 @@ const cardVariants = {
 export default function ProjectsPage() {
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
   const [active, setActive] = useState<Project | null>(null)
+
+  const itemsPerPage = 6
 
   const visible = projects.filter(p => {
     const cOK = category === 'All' || p.category === category
@@ -53,6 +87,28 @@ export default function ProjectsPage() {
     const qOK = p.title.toLowerCase().includes(q) || p.creator.toLowerCase().includes(q)
     return cOK && qOK
   })
+
+  const totalPages = Math.ceil(visible.length / itemsPerPage)
+  const paginatedProjects = visible.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [category, query])
+
+  const getPaginationGroup = () => {
+    if (totalPages <= 2) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1)
+    }
+
+    if (currentPage === totalPages) {
+      return [totalPages - 1, totalPages]
+    }
+
+    return [currentPage, currentPage + 1]
+  }
 
   return (
     <motion.div
@@ -62,7 +118,6 @@ export default function ProjectsPage() {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div className="max-w-6xl mx-auto">
-        {/* Heading */}
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             All Projects
@@ -70,7 +125,6 @@ export default function ProjectsPage() {
           <p className="text-lg text-gray-600">Music, visuals, graphics & AI explorations from SiR Musiz.</p>
         </div>
 
-        {/* Filter */}
         <div className="rounded-3xl border border-teal-200/60 bg-white/60 backdrop-blur-md shadow-inner
                         flex flex-wrap gap-4 items-center justify-between px-6 py-5 mb-14">
           <input
@@ -99,7 +153,6 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* Grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -109,7 +162,7 @@ export default function ProjectsPage() {
             show: { transition: { staggerChildren: 0.08 } },
           }}
         >
-          {visible.map(v => (
+          {paginatedProjects.map(v => (
             <motion.div
               key={v.id}
               whileHover={{ scale: 1.03 }}
@@ -119,12 +172,29 @@ export default function ProjectsPage() {
               className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl overflow-hidden shadow-md group cursor-pointer"
             >
               <div className="aspect-video overflow-hidden">
-                <iframe
-                  src={`https://www.youtube.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
-                  title={v.title}
-                  className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
-                  allowFullScreen
-                />
+                {v.youtubeId ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
+                    title={v.title}
+                    className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                    allowFullScreen
+                  />
+                ) : v.instagramUrl ? (
+                  <iframe
+                    src={v.instagramUrl}
+                    title={v.title}
+                    className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
+                ) : v.driveUrl ? (
+                  <iframe
+                    src={v.driveUrl}
+                    title={v.title}
+                    className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                    allowFullScreen
+                  />
+                ) : null}
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-semibold">{v.title}</h3>
@@ -135,11 +205,64 @@ export default function ProjectsPage() {
           ))}
         </motion.div>
 
-        {/* Empty state */}
         {visible.length === 0 && (
           <div className="text-center py-20 text-gray-500">
             <div className="text-5xl mb-4">🔍</div>
             <p className="text-xl font-semibold">No matching projects found</p>
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-center">
+            <nav className="flex items-center gap-2">
+              <motion.button
+                key="back"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCurrentPage(p => p - 1)}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
+                  currentPage === 1
+                    ? 'bg-white/60 text-gray-400 cursor-not-allowed'
+                    : 'bg-white/80 text-gray-700 hover:bg-blue-100'
+                }`}
+              >
+                <FiChevronLeft />
+                Previous
+              </motion.button>
+
+              {getPaginationGroup().map(page => (
+                <motion.button
+                  key={page}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currentPage === page
+                      ? 'bg-blue-500 text-white shadow-md'
+                      : 'bg-white/80 text-gray-700 hover:bg-blue-100'
+                  }`}
+                >
+                  {page}
+                </motion.button>
+              ))}
+
+              <motion.button
+                key="forward"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCurrentPage(p => p + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
+                  currentPage === totalPages
+                    ? 'bg-white/60 text-gray-400 cursor-not-allowed'
+                    : 'bg-white/80 text-gray-700 hover:bg-blue-100'
+                }`}
+              >
+                Forward
+                <FiChevronRight />
+              </motion.button>
+            </nav>
           </div>
         )}
       </div>
@@ -161,10 +284,20 @@ export default function ProjectsPage() {
               exit={{ scale: 0.9, y: 40 }}
               transition={{ duration: 0.3 }}
               onClick={e => e.stopPropagation()}
-              className="relative w-full max-w-4xl aspect-video"
+              className={`relative w-full ${
+                active.instagramUrl ? 'max-w-sm aspect-[9/16]' : 'max-w-4xl aspect-video'
+              }`}
             >
               <iframe
-                src={`https://www.youtube.com/embed/${active.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                src={
+                  active.youtubeId
+                    ? `https://www.youtube.com/embed/${active.youtubeId}?autoplay=1&rel=0&modestbranding=1`
+                    : active.instagramUrl
+                    ? active.instagramUrl
+                    : active.driveUrl
+                    ? active.driveUrl
+                    : ''
+                }
                 title={active.title}
                 allow="autoplay; encrypted-media; fullscreen"
                 allowFullScreen

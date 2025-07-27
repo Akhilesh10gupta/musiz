@@ -13,6 +13,7 @@ interface Project {
   youtubeId?: string
   instagramUrl?: string
   driveUrl?: string
+  spotifyUrl?: string
 }
 
 const projects: Project[] = [
@@ -50,6 +51,21 @@ const projects: Project[] = [
   // { id: 32, title: 'Rajkumari', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlyafWSwmO/embed' },
   // { id: 33, title: 'lifeofpaaji', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DLFmw33uk8K/embed' },
   // { id: 34, title: 'Bro Code Roast', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed' },
+  { id: 32, title: 'Spotify Album 1', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/14C6KpEj0N1cJrn8WYFZC4' },
+  { id: 33, title: 'Spotify Album 2', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/3bE1xlsjAkAjepZZgFUMAj' },
+  { id: 34, title: 'Spotify Album 3', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/39GhjI6k6q85EQ8JrYLgG0' },
+  { id: 35, title: 'Spotify Album 4', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/0jBxsIoRfw0BT4frXTNyEN' },
+  { id: 36, title: 'Spotify Album 5', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/6UkOSXvsookOU68hmzQGP2' },
+  { id: 37, title: 'Spotify Album 6', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/4s6yHXgYOdLBFllwc9C6un' },
+  { id: 38, title: 'Spotify Album 7', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/1LkEMVVmfTj3pQ4msBSBag' },
+  { id: 39, title: 'YouTube Link 1', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'XJ8dPrPWiSM' },
+  { id: 40, title: 'YouTube Link 2', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'KAImrOOFG9E' },
+  { id: 41, title: 'YouTube Link 3', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'iHpMRAJWRhQ' },
+  { id: 42, title: 'YouTube Link 4', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'f5m5Nd50LZI' },
+  { id: 43, title: 'War of Eye', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'XJ8dPrPWiSM' },
+  { id: 44, title: 'OPEN MESSAGE', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'KAImrOOFG9E' },
+  { id: 45, title: 'Heartstrings', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'iHpMRAJWRhQ' },
+  { id: 46, title: 'Missing You', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'f5m5Nd50LZI' },
 ]
 
 const categories = [
@@ -194,6 +210,14 @@ export default function ProjectsPage() {
                     className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
                     allowFullScreen
                   />
+                ) : v.spotifyUrl ? (
+                  <iframe
+                    src={v.spotifyUrl}
+                    title={v.title}
+                    className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
                 ) : null}
               </div>
               <div className="p-4">
@@ -285,7 +309,7 @@ export default function ProjectsPage() {
               transition={{ duration: 0.3 }}
               onClick={e => e.stopPropagation()}
               className={`relative w-full ${
-                active.instagramUrl ? 'max-w-sm aspect-[9/16]' : 'max-w-4xl aspect-video'
+                active.instagramUrl || active.spotifyUrl ? 'max-w-sm aspect-[9/16]' : 'max-w-4xl aspect-video'
               }`}
             >
               <iframe
@@ -296,6 +320,8 @@ export default function ProjectsPage() {
                     ? active.instagramUrl
                     : active.driveUrl
                     ? active.driveUrl
+                    : active.spotifyUrl
+                    ? active.spotifyUrl
                     : ''
                 }
                 title={active.title}

@@ -45,7 +45,6 @@ export default function Hero() {
       color: colors[Math.floor(Math.random() * colors.length)],
     }))
 
-    let skipFrame = false
     const step = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 

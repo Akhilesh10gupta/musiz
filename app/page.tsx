@@ -15,10 +15,23 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 2000) // You can adjust this duration
+    }, 1500) // Reduced duration for a snappier feel
 
     return () => clearTimeout(timer)
   }, [])
+
+  // Effect to handle scrolling to hash after loading screen
+  useEffect(() => {
+    if (!loading) {
+      const hash = window.location.hash
+      if (hash) {
+        const element = document.querySelector(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+  }, [loading])
 
   return (
     <>

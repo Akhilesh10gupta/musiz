@@ -47,9 +47,9 @@ const projects: Project[] = [
   { id: 29, title: 'Project Two', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 2.', driveUrl: 'https://drive.google.com/file/d/1b736PrBW_GA5XHeqZxFLBrB7aB5bd84J/preview' },
   { id: 30, title: 'Project Three', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 3.', driveUrl: 'https://drive.google.com/file/d/1bHWQ8JECPA-xU6IfovSP6y8lMINwCWUh/preview' },
   { id: 31, title: 'Project Four', creator: 'SiR Musiz', category: 'Video Production', description: 'Drive video 4.', driveUrl: 'https://drive.google.com/file/d/120f4lcF3UHfJ4JC2Rx5uqaNnxtKYZs-8/preview' },
-  { id: 32, title: 'Rajkumari', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlyafWSwmO/embed' },
-  { id: 33, title: 'lifeofpaaji', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DLFmw33uk8K/embed' },
-  { id: 34, title: 'Bro Code Roast', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed' },
+  // { id: 32, title: 'Rajkumari', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlyafWSwmO/embed' },
+  // { id: 33, title: 'lifeofpaaji', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DLFmw33uk8K/embed' },
+  // { id: 34, title: 'Bro Code Roast', creator: 'SiR Musiz', category: 'Music Production', description: 'Instagram music showcase.', instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed' },
 ]
 
 const categories = [

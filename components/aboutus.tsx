@@ -125,7 +125,7 @@ export default function About() {
                       className="object-cover"
                     />
                   </div>
-                  <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
+                  <h3 className="font-semibold text-lg text-gray-900">{member.name}</h3>
                   <p className="text-sm text-gray-700">{member.role}</p>
                   <button
                     onClick={() => toggleLike(idx)}

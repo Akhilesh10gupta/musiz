@@ -34,7 +34,7 @@ export default function Hero() {
     setSize()
 
     const colors = ['#8B5CF6', '#06B6D4', '#F59E0B']
-    const COUNT = isMobile ? 12 : 50
+    const COUNT = isMobile ? 6 : 50
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -47,11 +47,6 @@ export default function Hero() {
 
     let skipFrame = false
     const step = () => {
-      if (isMobile && (skipFrame = !skipFrame)) {
-        requestAnimationFrame(step)
-        return
-      }
-
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       particles.forEach((p, i) => {
@@ -68,6 +63,7 @@ export default function Hero() {
         ctx.fill()
         ctx.restore()
 
+        // Only draw lines on desktop
         if (!isMobile) {
           for (let j = i + 1; j < particles.length; j++) {
             const o = particles[j]
@@ -87,7 +83,11 @@ export default function Hero() {
         }
       })
 
-      requestAnimationFrame(step)
+      if (isMobile) {
+        setTimeout(step, 50) // ~20 FPS
+      } else {
+        requestAnimationFrame(step)
+      }
     }
     step()
 

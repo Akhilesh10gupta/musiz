@@ -6,25 +6,26 @@ import { BsFillPlayFill, BsPauseFill } from 'react-icons/bs'
 
 export default function Hero() {
   /* ───────────────── mounted flag ───────────────── */
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+    setIsMobile(window.matchMedia('(max-width: 640px)').matches);
+  }, []);
 
   /* ───────────────── canvas ───────────────── */
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
-    if (!canvasRef.current || typeof window === 'undefined') return
+    if (!mounted || !canvasRef.current) return;
+
+    // Performance: Completely disable the particle animation on mobile devices.
+    if (isMobile) return
 
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-
-    const isMobile = window.matchMedia('(max-width: 640px)').matches
-    // 💡 Performance: Completely disable the particle animation on mobile devices
-    // to prevent lagging and ensure a smoother experience.
-    if (isMobile) return
 
     const dpr = isMobile ? 1 : window.devicePixelRatio || 1
 
@@ -96,7 +97,7 @@ export default function Hero() {
 
     window.addEventListener('resize', setSize)
     return () => window.removeEventListener('resize', setSize)
-  }, [mounted])
+  }, [mounted, isMobile])
 
   /* ───────────────── vinyl / audio ───────────────── */
   const [isPlaying, toggle] = useCycle(false, true)
@@ -110,15 +111,6 @@ export default function Hero() {
     toggle()
   }
 
-  /* ───────────────── sparkles ───────────────── */
-  const [sparkles, setSparkles] = useState(8)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isMobile = window.matchMedia('(max-width: 640px)').matches
-      setSparkles(isMobile ? 0 : 8)
-    }
-  }, [])
-
   /* ───────────────── avoid SSR mismatch ───────────────── */
   if (!mounted) return null
 
@@ -131,11 +123,15 @@ export default function Hero() {
       <canvas ref={canvasRef} className="pointer-events-none absolute inset-0" />
 
       {/* blurred blobs */}
-      <div className="pointer-events-none absolute -top-48 -left-48 w-[680px] h-[680px] bg-blue-800/20 rounded-full blur-[140px]" />
-      <div className="pointer-events-none absolute -bottom-48 -right-48 w-[560px] h-[560px] bg-indigo-600/20 rounded-full blur-[120px]" />
+      {!isMobile && (
+        <>
+          <div className="pointer-events-none absolute -top-48 -left-48 w-[680px] h-[680px] bg-blue-800/20 rounded-full blur-[140px]" />
+          <div className="pointer-events-none absolute -bottom-48 -right-48 w-[560px] h-[560px] bg-indigo-600/20 rounded-full blur-[120px]" />
+        </>
+      )}
 
       {/* sparkles */}
-      {[...Array(sparkles)].map((_, i) => (
+      {!isMobile && [...Array(8)].map((_, i) => (
         <motion.div
           key={i}
           className="pointer-events-none absolute w-1.5 h-1.5 bg-white rounded-full"
@@ -186,7 +182,9 @@ export default function Hero() {
         transition={{ duration: 1.1, ease: 'easeOut', delay: 0.4 }}
         className="relative w-64 h-64 sm:w-80 sm:h-80 xl:w-[23rem] xl:h-[23rem]"
       >
-        <div className="pointer-events-none absolute inset-0 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+        {!isMobile && (
+          <div className="pointer-events-none absolute inset-0 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+        )}
 
         <motion.img
           src="/vinyl.png"

@@ -151,25 +151,26 @@ export default function Hero() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
-        className="max-w-2xl text-center xl:text-left"
+        className="max-w-2xl w-full px-2 sm:px-0 text-center xl:text-left"
       >
-        <h1 className="text-4xl sm:text-6xl xl:text-8xl font-extrabold leading-tight text-black">
+        <h1 className="text-4xl sm:text-5xl xl:text-8xl font-extrabold leading-tight sm:leading-tight xl:leading-tight text-black drop-shadow-md">
           Your next big<br />
           project&nbsp;
-          <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent font-black drop-shadow-lg hero-animated-gradient">
             awaits!
           </span>
+          <span className="hero-music-wave sm:hidden"></span>
         </h1>
-        <p className="mt-6 text-lg sm:text-xl text-gray-800/90">
-          We’re on with your hustle journey, through our<br />
+        <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-gray-800/90 leading-relaxed sm:leading-relaxed">
+          We’re on with your hustle journey, through our<br className='hidden xs:inline' />
           comprehensive sound and music production services.
         </p>
         <motion.a
           href="/contact"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-block mt-10 px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500
-                     text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
+          className="inline-block mt-8 sm:mt-12 px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500
+                     text-white text-lg sm:text-xl font-bold shadow-lg hover:shadow-xl transition-shadow"
         >
           BOOK NOW
         </motion.a>

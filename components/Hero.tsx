@@ -8,10 +8,18 @@ export default function Hero() {
   /* ───────────────── mounted flag ───────────────── */
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showPing, setShowPing] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     setIsMobile(window.matchMedia('(max-width: 640px)').matches);
+
+    // Timer to delay the ping animation until after the vinyl player has animated in
+    const pingTimer = setTimeout(() => {
+      setShowPing(true);
+    }, 1500); // Matches the vinyl's entrance animation (1.1s duration + 0.4s delay)
+
+    return () => clearTimeout(pingTimer);
   }, []);
 
   /* ───────────────── canvas ───────────────── */
@@ -204,7 +212,7 @@ export default function Hero() {
           className="absolute inset-0 flex items-center justify-center focus:outline-none"
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
-          {!isPlaying && (
+          {!isPlaying && showPing && (
             <span className="absolute inline-flex h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-blue-500/70 opacity-75 animate-ping" />
           )}
           <span className="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg">

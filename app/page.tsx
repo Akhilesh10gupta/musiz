@@ -13,11 +13,21 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 1500) // Reduced duration for a snappier feel
+    // This logic now runs only on the client
+    const hasVisited = sessionStorage.getItem('hasVisitedSirMusiz')
 
-    return () => clearTimeout(timer)
+    if (hasVisited) {
+      // If they've visited in this session, don't show the loader
+      setLoading(false)
+    } else {
+      // On first visit in a session, show the loader, then set the flag
+      sessionStorage.setItem('hasVisitedSirMusiz', 'true')
+      const timer = setTimeout(() => {
+        setLoading(false)
+      }, 1500) // You can adjust this duration
+
+      return () => clearTimeout(timer)
+    }
   }, [])
 
   // Effect to handle scrolling to hash after loading screen

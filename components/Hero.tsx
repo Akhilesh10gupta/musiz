@@ -124,17 +124,17 @@ export default function Hero() {
       className="relative min-h-[100dvh] pt-32 lg:pt-40 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-50
                  flex flex-col xl:flex-row items-center justify-center gap-16 xl:gap-32 px-6 pb-24 overflow-hidden"
     >
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0" />
 
       {/* blurred blobs */}
-      <div className="absolute -top-48 -left-48 w-[680px] h-[680px] bg-blue-800/20 rounded-full blur-[140px]" />
-      <div className="absolute -bottom-48 -right-48 w-[560px] h-[560px] bg-indigo-600/20 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute -top-48 -left-48 w-[680px] h-[680px] bg-blue-800/20 rounded-full blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-48 -right-48 w-[560px] h-[560px] bg-indigo-600/20 rounded-full blur-[120px]" />
 
       {/* sparkles */}
       {[...Array(sparkles)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1.5 h-1.5 bg-white rounded-full"
+          className="pointer-events-none absolute w-1.5 h-1.5 bg-white rounded-full"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: [0, 0.8, 0], scale: [0, 1, 0], y: [0, -40], x: [0, 20] }}
           transition={{ repeat: Infinity, duration: 6 + i, delay: i * 0.7, ease: 'easeInOut' }}
@@ -182,7 +182,7 @@ export default function Hero() {
         transition={{ duration: 1.1, ease: 'easeOut', delay: 0.4 }}
         className="relative w-64 h-64 sm:w-80 sm:h-80 xl:w-[23rem] xl:h-[23rem]"
       >
-        <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+        <div className="pointer-events-none absolute inset-0 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
 
         <motion.img
           src="/vinyl.png"

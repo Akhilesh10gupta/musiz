@@ -111,7 +111,7 @@ export default function Hero() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isMobile = window.matchMedia('(max-width: 640px)').matches
-      setSparkles(isMobile ? 4 : 8)
+      setSparkles(isMobile ? 0 : 8)
     }
   }, [])
 

@@ -12,14 +12,21 @@ export default function Hero() {
 
   useEffect(() => {
     setMounted(true);
-    setIsMobile(window.matchMedia('(max-width: 640px)').matches);
+    const mediaQuery = window.matchMedia('(max-width: 640px)');
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+    handleResize(); // Set initial state
+
+    mediaQuery.addEventListener('change', handleResize);
 
     // Timer to delay the ping animation until after the vinyl player has animated in
     const pingTimer = setTimeout(() => {
       setShowPing(true);
     }, 1500); // Matches the vinyl's entrance animation (1.1s duration + 0.4s delay)
 
-    return () => clearTimeout(pingTimer);
+    return () => {
+      clearTimeout(pingTimer);
+      mediaQuery.removeEventListener('change', handleResize);
+    }
   }, []);
 
   /* ───────────────── canvas ───────────────── */
@@ -58,6 +65,7 @@ export default function Hero() {
       color: colors[Math.floor(Math.random() * colors.length)],
     }))
 
+    let animationFrameId: number;
     const step = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -98,13 +106,16 @@ export default function Hero() {
       if (isMobile) {
         setTimeout(step, 50) // ~20 FPS
       } else {
-        requestAnimationFrame(step)
+        animationFrameId = requestAnimationFrame(step)
       }
     }
     step()
 
     window.addEventListener('resize', setSize)
-    return () => window.removeEventListener('resize', setSize)
+    return () => {
+      window.removeEventListener('resize', setSize)
+      cancelAnimationFrame(animationFrameId)
+    }
   }, [mounted, isMobile])
 
   /* ───────────────── vinyl / audio ───────────────── */
@@ -197,8 +208,18 @@ export default function Hero() {
         <motion.img
           src="/vinyl.png"
           alt="Vinyl"
-          animate={{ rotate: isPlaying ? [0, 360] : [0], y: [0, -6, 0] }}
-          transition={{ repeat: isPlaying ? Infinity : 0, repeatType: 'loop', ease: 'linear', duration: 8 }}
+          animate={{ 
+            rotate: 360,
+            y: [0, -6, 0] 
+          }}
+          transition={{ 
+            rotate: { 
+              repeat: isPlaying ? Infinity : 0, 
+              ease: "linear", 
+              duration: 8 
+            },
+            y: { repeat: Infinity, repeatType: "mirror", duration: 2.5, ease: "easeInOut" }
+          }}
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />
 

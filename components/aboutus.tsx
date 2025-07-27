@@ -1,4 +1,10 @@
 'use client'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us - SiR Musiz',
+  description: 'Learn more about SiR Musiz, our mission, and the creative minds behind our audio-visual productions.',
+}
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -8,6 +14,8 @@ import Image from 'next/image'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
+
 
 // ✅ Type-safe animation variant
 const fadeUp: Variants = {

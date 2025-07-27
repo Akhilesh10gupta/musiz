@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +26,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'SiR Musiz - Creative Audio & Visual Production',
     description: 'A creative haven for audio and visual arts.',
-    url: 'https://your-domain.com', // Replace with your actual domain
+    url: 'https://sirmusizstudios.com', // Replace with your actual domain
     siteName: 'SiR Musiz',
     images: [
       {
-        url: 'https://your-domain.com/og-image.png', // Replace with a link to your OG image
+        url: 'https://sirmusizstudios.com/og-image.png', // Replace with a link to your OG image
         width: 1200,
         height: 630,
       },
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     title: 'SiR Musiz - Creative Audio & Visual Production',
     description: 'A creative haven for audio and visual arts.',
     // creator: '@your_twitter_handle', // Replace with your Twitter handle
-    images: ['https://your-domain.com/og-image.png'], // Replace with a link to your OG image
+    images: ['https://sirmusizstudios.com/og-image.png'], // Replace with a link to your OG image
   },
 }
 
@@ -51,8 +52,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicGroup', // Or 'Organization'
+    name: 'SiR Musiz',
+    url: 'https://sirmusizstudios.com', // Replace with your actual domain
+    logo: 'https://sirmusizstudios.com/logo.png', // Replace with your logo URL
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+91 84678 98698', // Replace with your phone number
+      contactType: 'customer service',
+    },
+  };
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <Script
+          id="json-ld-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

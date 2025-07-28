@@ -2,8 +2,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us - SiR Musiz',
-  description: 'Learn more about SiR Musiz, our mission, and the creative minds behind our audio-visual productions.',
+  title: 'About Us - SiR Musiz Studios',
+  description: 'Learn more about SiR Musiz Studios, our mission, and the creative minds behind our audio-visual productions.',
 }
 
 import React, { useState } from 'react'
@@ -114,7 +114,7 @@ export default function About() {
           viewport={{ once: true }}
           className="mx-auto max-w-3xl text-center text-lg sm:text-xl text-gray-700 leading-relaxed mb-16"
         >
-          SiR Musiz is a creative haven where sonic innovation meets soulful storytelling.
+          SiR Musiz Studios is a creative haven where sonic innovation meets soulful storytelling.
           Our crew turns raw ideas into immersive audio-visual experiences.
         </motion.p>
 

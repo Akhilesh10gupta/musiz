@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 border-b border-gray-800 pb-6 text-center md:text-left">
           {/* Brand Info */}
           <div>
-            <h3 className="text-white text-2xl font-bold mb-2 tracking-tight">SiR Musiz</h3>
+            <h3 className="text-white text-2xl font-bold mb-2 tracking-tight">SiR Musiz Studios</h3>
             <p className="text-gray-500 text-xs leading-relaxed max-w-xs mx-auto md:mx-0">
               Music is the shorthand of emotion.<br />Let professionals handle your rhythm and vibes.
             </p>

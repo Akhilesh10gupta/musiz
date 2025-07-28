@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { BsFillPlayFill } from 'react-icons/bs'
+import { FaGoogleDrive } from 'react-icons/fa'
 
 interface Project {
   id: number
@@ -57,7 +59,7 @@ const projects: Project[] = [
   { id: 35, title: 'You & Me - AD Rapstar', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/0jBxsIoRfw0BT4frXTNyEN' },
   { id: 36, title: 'Soul - R Jxy', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/6UkOSXvsookOU68hmzQGP2' },
   { id: 37, title: 'Call - AD Rapstar', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/4s6yHXgYOdLBFllwc9C6un' },
-  { id: 38, title: 'Flex Kare Munde - AD Rapstar', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/1LkEMVVmfTj3pQ4msBSBag' },
+  { id: 38, title: 'Missing You - AD Rapstar', creator: 'SiR Musiz', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/2Ch2eQvFQznNznqzZEC5hv' },
   { id: 39, title: 'YouTube Link 1', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'XJ8dPrPWiSM' },
   { id: 40, title: 'YouTube Link 2', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'KAImrOOFG9E' },
   { id: 41, title: 'YouTube Link 3', creator: 'SiR Musiz', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'iHpMRAJWRhQ' },
@@ -187,7 +189,7 @@ export default function ProjectsPage() {
               onClick={() => setActive(v)}
               className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl overflow-hidden shadow-md group cursor-pointer"
             >
-              <div className="aspect-video overflow-hidden">
+              <div className="aspect-video overflow-hidden relative">
                 {v.youtubeId ? (
                   <iframe
                     src={`https://www.youtube.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
@@ -204,12 +206,13 @@ export default function ProjectsPage() {
                     allowFullScreen
                   />
                 ) : v.driveUrl ? (
-                  <iframe
-                    src={v.driveUrl}
-                    title={v.title}
-                    className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
-                    allowFullScreen
-                  />
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gray-800 text-white p-4 text-center transition-transform duration-300 group-hover:scale-105">
+                    <FaGoogleDrive className="text-5xl text-gray-400 mb-3" />
+                    <span className="text-sm font-medium">{v.title}</span>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <BsFillPlayFill className="text-white text-6xl" />
+                    </div>
+                  </div>
                 ) : v.spotifyUrl ? (
                   <iframe
                     src={v.spotifyUrl}

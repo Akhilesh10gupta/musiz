@@ -208,17 +208,22 @@ export default function Hero() {
         <motion.img
           src="/vinyl.png"
           alt="Vinyl"
-          animate={{ 
-            rotate: 360,
-            y: [0, -6, 0] 
+          animate={{
+            rotate: isPlaying ? 360 : 0,
+            y: isPlaying ? [0, -6, 0] : 0,
           }}
-          transition={{ 
-            rotate: { 
-              repeat: isPlaying ? Infinity : 0, 
-              ease: "linear", 
-              duration: 8 
+          transition={{
+            rotate: {
+              repeat: isPlaying ? Infinity : 0,
+              ease: 'linear',
+              duration: 8,
             },
-            y: { repeat: Infinity, repeatType: "mirror", duration: 2.5, ease: "easeInOut" }
+            y: {
+              repeat: isPlaying ? Infinity : 0,
+              repeatType: 'mirror',
+              duration: 2.5,
+              ease: 'easeInOut',
+            },
           }}
           className="relative w-full h-full rounded-full object-contain shadow-2xl"
         />

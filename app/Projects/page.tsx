@@ -208,7 +208,6 @@ export default function ProjectsPage() {
                 ) : v.driveUrl ? (
                   <div className="w-full h-full flex flex-col items-center justify-center bg-gray-800 text-white p-4 text-center transition-transform duration-300 group-hover:scale-105">
                     <FaGoogleDrive className="text-5xl text-gray-400 mb-3" />
-                    <span className="text-sm font-medium">{v.title}</span>
                     <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <BsFillPlayFill className="text-white text-6xl" />
                     </div>
@@ -222,11 +221,6 @@ export default function ProjectsPage() {
                     loading="lazy"
                   />
                 ) : null}
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{v.title}</h3>
-                <p className="text-sm text-purple-600">{v.creator}</p>
-                <p className="text-sm text-gray-600 mt-1">{v.description}</p>
               </div>
             </motion.div>
           ))}

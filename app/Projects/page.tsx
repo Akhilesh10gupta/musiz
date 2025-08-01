@@ -68,15 +68,42 @@ const projects: Project[] = [
   { id: 44, title: 'OPEN MESSAGE', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'KAImrOOFG9E' },
   { id: 45, title: 'Heartstrings', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'iHpMRAJWRhQ' },
   { id: 46, title: 'Missing You', creator: 'SiR Musiz', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'f5m5Nd50LZI' },
+  {
+    id: 47,
+    title: 'Rajkumari Sound Design',
+    creator: 'SiR Musiz',
+    category: 'Sound Design',
+    description: 'Custom sound design for Instagram Reel.',
+    instagramUrl: 'https://www.instagram.com/reel/DJlyafWSwmO/embed',
+  },
+  {
+    id: 48,
+    title: 'Life Of Paaji Sound Design',
+    creator: 'SiR Musiz',
+    category: 'Sound Design',
+    description: 'Custom sound design for Instagram Reel.',
+    instagramUrl: 'https://www.instagram.com/reel/DLFmw33uk8K/embed',
+  },
+  {
+    id: 49,
+    title: 'Bro Code Roast Sound Design',
+    creator: 'SiR Musiz',
+    category: 'Sound Design',
+    description: 'Custom sound design for Instagram Reel.',
+    instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed',
+  },
 ]
 
 const categories = [
   'All',
   'Music Production',
+  'Sound Design',
+  'Mixing Section',
   'Video Production',
   'Animation & Motion Graphics',
   'Poster & Social Media Post',
   'AI Content',
+  
 ]
 
 const cardVariants = {

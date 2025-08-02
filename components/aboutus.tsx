@@ -34,7 +34,7 @@ const TEAM = [
   { name: 'R Jxy', role: 'Audio Engineer & Music Producer', img: '/team/male-avatar.jpg' },
   { name: 'AD Rapstar', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },
   { name: 'KRSH', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },
-  { name: 'Adna', role: 'Video Editor', img: '/team/adna.jpg' },
+  { name: 'Adnan', role: 'Video Editor', img: '/team/adna.jpg' },
   { name: 'Ayush', role: 'Graphics designer & Animator', img: '/team/male-avatar.jpg' },
   { name: 'Akhilesh Gupta', role: 'Web Design Manager', img: '/team/akhilesh.jpg' },
   { name: 'Himanshu', role: 'Customer Relationship', img: '/team/male-avatar.jpg' },

@@ -7,8 +7,8 @@ import Container from './Container' // ✅ using Container wrapper
 /* ---------- Artist Data ---------- */
 export const ARTISTS = [
   {
-    name: 'Luna Eclipse',
-    genre: 'Electronic / Ambient',
+    name: 'AD Rapstar',
+    genre: 'Hip-hop, Pop',
     description: 'Grammy-nominated producer creating ethereal soundscapes that blend electronic and organic elements.',
     achievement: '500M+ Streams',
     image: '🌙',

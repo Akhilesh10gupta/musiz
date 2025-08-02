@@ -26,7 +26,14 @@ const NavItem = memo(({ artist, active, onClick }: { artist: Artist; active: boo
         active ? `border ${c.b} bg-white/70 shadow` : 'hover:bg-white/50 hover:shadow-sm'
       }`}
     >
-      <span className="text-2xl sm:text-3xl">{artist.image}</span>
+      <span className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full overflow-hidden bg-white">
+        {artist.image.startsWith('/') ? (
+          <img src={artist.image} alt={artist.name} className="w-full h-full object-cover" />
+        ) : (
+          <span className="text-2xl sm:text-3xl">{artist.image}</span>
+        )}
+      </span>
+
       <span>
         <span className={`block font-semibold text-sm sm:text-base ${active ? 'text-gradient' : 'text-black'}`}>
           {artist.name}
@@ -43,7 +50,18 @@ const GridCard = memo(({ artist }: { artist: Artist }) => {
   return (
     <div className={`rounded-3xl border ${c.b} bg-white/30 backdrop-blur p-5 sm:p-6 shadow-md`}>
       <div className="text-center">
-        <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">{artist.image}</div>
+        <div className="mb-2 sm:mb-3 ">
+            {artist.image.startsWith('/') ? (
+              <img
+                src={artist.image}
+                alt={artist.name}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full mx-auto"
+              />
+            ) : (
+              <div className="text-4xl sm:text-5xl">{artist.image}</div>
+            )}
+          </div>
+
         <h3 className="font-bold text-base sm:text-lg">{artist.name}</h3>
         <p className={`${c.t} text-xs sm:text-sm mb-1 sm:mb-2`}>{artist.genre}</p>
         <div className="text-xs text-neutral-700">{artist.achievement}</div>
@@ -116,7 +134,19 @@ export default function ArtistsPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10">
             <div>
-              <div className="text-5xl sm:text-7xl mb-3 sm:mb-4">{current.image}</div>
+              <div className="mb-3 sm:mb-4">
+                {current.image.startsWith('/') ? (
+                  <img
+                    src={current.image}
+                    alt={current.name}
+                    className="w-20 h-20 sm:w-28 sm:h-28 object-cover rounded-full"
+                  />
+                ) : (
+                  <div className="text-5xl sm:text-7xl">{current.image}</div>
+                )}
+              </div>
+
+
               <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-black">{current.name}</h3>
               <p className="text-cyan-700 mb-2 sm:mb-3">{current.genre}</p>
               <p className="mb-3 sm:mb-4 text-neutral-700">{current.description}</p>

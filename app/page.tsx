@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Container from '@/components/Container'
-import Hero from '@/components/Hero'
-import Services from '@/components/Services'
-import Projects from '@/components/Projects'
-import About from '@/components/aboutus'
 import LoadingScreen from '@/components/LoadingScreen'
+import dynamic from 'next/dynamic'
+
+const Hero = dynamic(() => import('@/components/Hero'))
+const Projects = dynamic(() => import('@/components/Projects'))
+const Services = dynamic(() => import('@/components/Services'))
+const About = dynamic(() => import('@/components/aboutus'))
 
 const Home = () => {
   const [loading, setLoading] = useState(true)

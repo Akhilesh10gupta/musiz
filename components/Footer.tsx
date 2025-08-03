@@ -54,7 +54,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="mt-4 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500 space-y-2 md:space-y-0">
           <p className="text-center">
-            © <span className="text-blue-400 font-medium">SiR Musiz</span> {new Date().getFullYear()}. All rights reserved.
+            © <span className="text-blue-400 font-medium">SiR Musiz Studios</span> {new Date().getFullYear()}. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>

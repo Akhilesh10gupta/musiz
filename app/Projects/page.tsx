@@ -16,6 +16,7 @@ interface Project {
   instagramUrl?: string
   driveUrl?: string
   spotifyUrl?: string
+  imageUrl?: string
 }
 
 const projects: Project[] = [
@@ -28,7 +29,6 @@ const projects: Project[] = [
   { id: 25, title: 'HANJU | R JXY ', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'Official music video.', youtubeId: '6ofVoItZ5sw' },
   { id: 26, title: 'Imagination - R Jxy', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'Official music video.', youtubeId: 'vIwr77d_KDM' },
   { id: 27, title: 'ROMANTIC TALE - AUN SHAH', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'Official music video.', youtubeId: 'AylZmIeKj-Q' },
-  { id: 4, title: 'Insta Promo', creator: 'Art Dept.', category: 'Poster & Social Media Post', description: 'Promo graphic timelapse.', youtubeId: 'Cqhd4om5kjk' },
   { id: 5, title: 'Find You', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: '1fBdoKd0jqc' },
   { id: 6, title: 'Calm Down', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'VENmAHFggXQ' },
   { id: 7, title: 'Laut Aa', creator: 'AI Cover', category: 'AI Content', description: 'AI-generated cover song.', youtubeId: 'h3oGa2cR-K4' },
@@ -61,7 +61,7 @@ const projects: Project[] = [
   { id: 37, title: 'Call - AD Rapstar', creator: 'SiR Musiz Studios', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/4s6yHXgYOdLBFllwc9C6un' },
   { id: 38, title: 'Missing You - AD Rapstar', creator: 'SiR Musiz Studios', category: 'Music Production', description: 'Spotify embed.', spotifyUrl: 'https://open.spotify.com/embed/album/2Ch2eQvFQznNznqzZEC5hv' },
   { id: 39, title: 'YouTube Link 1', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'XJ8dPrPWiSM' },
-  { id: 40, title: 'YouTube Link 2', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'KAImrOOFG9E' },
+  { id: 40, title: 'YouTube Link 2', creator: 'SiR Musiz Studios',category: 'Video Production', description: 'External YouTube video.', youtubeId: 'KAImrOOFG9E' },
   { id: 41, title: 'YouTube Link 3', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'iHpMRAJWRhQ' },
   { id: 42, title: 'YouTube Link 4', creator: 'SiR Musiz Studios', category: 'Video Production', description: 'External YouTube video.', youtubeId: 'f5m5Nd50LZI' },
   { id: 43, title: 'War of Eye', creator: 'SiR Musiz Studios', category: 'Music Production', description: 'Music production showcase.', youtubeId: 'XJ8dPrPWiSM' },
@@ -92,6 +92,40 @@ const projects: Project[] = [
     description: 'Custom sound design for Instagram Reel.',
     instagramUrl: 'https://www.instagram.com/reel/DJlk7PSznnR/embed',
   },
+  ...[
+    'cretaive_trustprobook1.png',
+    'cretaive_trustprobook2.png',
+    // 'cretaive_trustprobook3.png',
+    'cretaive_trustprobook4.png',
+    'edu1.jpg',
+    'edu2.jpg',
+    'edu3.jpg',
+    'edu4.jpg',
+    'music_poster1.png',
+    'music_poster2.jpg',
+    'music_poster3.jpg',
+    'music_poster4.png',
+    'real_estate1.png',
+    'real_estate2.png',
+    'real_estate3.png',
+    'real_estate4.png',
+    'smartkey_lendin1.png',
+    'smartkey_lendin2.png',
+    'smartkey_lendin3.png',
+    'smartkey_lendin4.png',
+    'top_notch_album_cover.png',
+    'trustprobook1.jpg',
+    'trustprobook2.png',
+    'trustprobook3.png',
+    'trustprobook4.png',
+  ].map((url, i) => ({
+    id: 50 + i,
+    title: 'Poster Image',
+    creator: 'Art Dept.',
+    category: 'Poster & Social Media Post',
+    description: 'A poster image.',
+    imageUrl: `/poster/${url}`,
+  })),
 ]
 
 const categories = [
@@ -123,6 +157,7 @@ export default function ProjectsPage() {
   const [query, setQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [active, setActive] = useState<Project | null>(null)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const itemsPerPage = 6
 
@@ -153,6 +188,26 @@ export default function ProjectsPage() {
     }
 
     return [currentPage, currentPage + 1]
+  }
+
+  const posterImages = projects.filter(p => p.category === 'Poster & Social Media Post' && p.imageUrl)
+
+  const openModal = (project: Project) => {
+    if (project.imageUrl) {
+      const imageIndex = posterImages.findIndex(p => p.id === project.id)
+      setActiveImageIndex(imageIndex)
+    }
+    setActive(project)
+  }
+
+  const nextImage = () => {
+    setActiveImageIndex(prev => (prev + 1) % posterImages.length)
+    setActive(posterImages[(activeImageIndex + 1) % posterImages.length])
+  }
+
+  const prevImage = () => {
+    setActiveImageIndex(prev => (prev - 1 + posterImages.length) % posterImages.length)
+    setActive(posterImages[(activeImageIndex - 1 + posterImages.length) % posterImages.length])
   }
 
   return (
@@ -213,7 +268,7 @@ export default function ProjectsPage() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               variants={cardVariants}
-              onClick={() => setActive(v)}
+              onClick={() => openModal(v)}
               className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl overflow-hidden shadow-md group cursor-pointer"
             >
               <div className="aspect-video overflow-hidden relative">
@@ -245,6 +300,13 @@ export default function ProjectsPage() {
                     title={v.title}
                     className="w-full h-full transition-transform duration-300 group-hover:scale-105 pointer-events-none"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
+                ) : v.imageUrl ? (
+                  <img
+                    src={v.imageUrl}
+                    alt={v.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 ) : null}
@@ -333,26 +395,53 @@ export default function ProjectsPage() {
               transition={{ duration: 0.3 }}
               onClick={e => e.stopPropagation()}
               className={`relative w-full ${
-                active.instagramUrl || active.spotifyUrl ? 'max-w-sm aspect-[9/16]' : 'max-w-4xl aspect-video'
+                active.instagramUrl || active.spotifyUrl
+                  ? 'max-w-sm aspect-[9/16]'
+                  : active.imageUrl
+                  ? 'max-w-4xl'
+                  : 'max-w-4xl aspect-video'
               }`}
             >
-              <iframe
-                src={
-                  active.youtubeId
-                    ? `https://www.youtube.com/embed/${active.youtubeId}?autoplay=1&rel=0&modestbranding=1`
-                    : active.instagramUrl
-                    ? active.instagramUrl
-                    : active.driveUrl
-                    ? active.driveUrl
-                    : active.spotifyUrl
-                    ? active.spotifyUrl
-                    : ''
-                }
-                title={active.title}
-                allow="autoplay; encrypted-media; fullscreen"
-                allowFullScreen
-                className="w-full h-full rounded-xl"
-              />
+              {active.imageUrl ? (
+                <>
+                  <img
+                    src={active.imageUrl}
+                    alt={active.title}
+                    className="w-full h-auto object-contain rounded-xl"
+                    loading="lazy"
+                  />
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-1 top-1/2 -translate-y-1/2 bg-blue-200 hover:bg-blue-300 rounded-full p-2 text-black"
+                  >
+                    <FiChevronLeft />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-1 top-1/2 -translate-y-1/2 bg-blue-200 hover:bg-blue-300 rounded-full p-2 text-black"
+                  >
+                    <FiChevronRight />
+                  </button>
+                </>
+              ) : (
+                <iframe
+                  src={
+                    active.youtubeId
+                      ? `https://www.youtube.com/embed/${active.youtubeId}?autoplay=1&rel=0&modestbranding=1`
+                      : active.instagramUrl
+                      ? active.instagramUrl
+                      : active.driveUrl
+                      ? active.driveUrl
+                      : active.spotifyUrl
+                      ? active.spotifyUrl
+                      : ''
+                  }
+                  title={active.title}
+                  allow="autoplay; encrypted-media; fullscreen"
+                  allowFullScreen
+                  className="w-full h-full rounded-xl"
+                />
+              )}
               <button
                 onClick={() => setActive(null)}
                 className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-black font-bold text-xl shadow-md"

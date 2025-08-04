@@ -104,7 +104,6 @@ const projects: Project[] = [
     'music_poster9.jpg',
     'cretaive_trustprobook1.png',
     'cretaive_trustprobook2.png',
-    // 'cretaive_trustprobook3.png',
     'cretaive_trustprobook4.png',
     'smartkey_lendin2.png',
     'top_notch_album_cover.png',

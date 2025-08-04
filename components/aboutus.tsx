@@ -30,7 +30,7 @@ const fadeUp: Variants = {
 const TEAM = [
   { name: 'Shivam Kumar Gupta', role: 'Founder & Head', img: '/team/shivam.jpg' },
   { name: 'Dilip Gupta', role: 'Manager & Finance Manager', img: '/team/male-avatar.jpg' },
-  { name: 'Shobha Madheshiya', role: 'Creative & Finance Manager', img: '/team/female-avatar.jpg' },
+  { name: 'Shobha Madheshiya', role: 'Creative & Finance Manager', img: '/team/shobha.jpg' },
   { name: 'R Jxy', role: 'Audio Engineer & Music Producer', img: '/team/r_jxy.jpg' },
   { name: 'AD Rapstar', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },
   { name: 'KRSH', role: 'Mixing Engineer', img: '/team/male-avatar.jpg' },

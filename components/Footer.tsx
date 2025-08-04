@@ -32,10 +32,10 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold text-base mb-2">About</h4>
             <ul className="space-y-1 text-xs">
-              <li><Link href="#" className="hover:text-white transition">My History</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Blogs</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Newsletter</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Pricing List</Link></li>
+              <li><Link href="/history" className="hover:text-white transition">My History</Link></li>
+              <li><Link href="/blogs" className="hover:text-white transition">Blogs</Link></li>
+              <li><Link href="/newsletters" className="hover:text-white transition">Newsletter</Link></li>
+              <li><Link href="/pricing" className="hover:text-white transition">Pricing List</Link></li>
             </ul>
           </div>
 
@@ -43,10 +43,10 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold text-base mb-2">Information</h4>
             <ul className="space-y-1 text-xs">
-              <li><Link href="#" className="hover:text-white transition">Sitemap</Link></li>
-              <li><Link href="#" className="hover:text-white transition">FAQ</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Contact Me</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Community</Link></li>
+              <li><Link href="/sitemap" className="hover:text-white transition">Sitemap</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition">Contact Me</Link></li>
+              <li><Link href="/community" className="hover:text-white transition">Community</Link></li>
             </ul>
           </div>
         </div>

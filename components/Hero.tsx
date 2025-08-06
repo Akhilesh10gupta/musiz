@@ -183,6 +183,9 @@ export default function Hero() {
           We’re on with your hustle journey, through our<br className='hidden xs:inline' />
           comprehensive sound and music production services.
         </p>
+        <p className="sr-only">
+          Musiz is a leading audio and visual production studio specializing in music production, sound design, video editing, and graphic design. We offer a full spectrum of services for artists, producers, and businesses, including professional recording, mixing, mastering, custom beat creation, vocal tuning, audio restoration, and immersive soundscapes for film and multimedia. Our team of expert audio engineers and creative professionals is dedicated to transforming your artistic vision into high-quality, impactful audio and visual experiences. We utilize state-of-the-art equipment and innovative techniques to ensure every project achieves sonic excellence and stands out in the competitive music industry. Partner with Musiz for unparalleled quality and a seamless production journey, from concept to final release.
+        </p>
         <motion.a
           href="/contact"
           whileHover={{ scale: 1.08 }}

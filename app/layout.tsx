@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     images: ['https://sirmusizstudios.com/logo.png'], // Replace with a link to your OG image
   },
   icons: {
-    icon: '/logo_2.png',
+    icon: '/logo_2.ico',
   },
 }
 

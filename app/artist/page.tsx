@@ -117,9 +117,9 @@ export default function ArtistsPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-cyan-400 to-blue-500 hover:drop-shadow-[0_1px_10px_rgba(0,200,255,0.4)] transition">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-cyan-400 to-blue-500 hover:drop-shadow-[0_1px_10px_rgba(0,200,255,0.4)] transition">
             Artist&nbsp;Portfolio
-          </h2>
+          </h1>
           <p className="mx-auto max-w-xl sm:max-w-3xl text-base sm:text-lg text-neutral-700">
             Discover talented creators who trust us with their vision.
           </p>

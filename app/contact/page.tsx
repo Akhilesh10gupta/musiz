@@ -73,7 +73,7 @@ export default function Contact() {
 
         {/* ───────── Right: Info ───────── */}
         <div className="mt-12 md:mt-0 md:pl-8 flex flex-col gap-8">
-          <h2 className="text-5xl font-extrabold text-blue-400">Get in Touch.</h2>
+          <h1 className="text-5xl font-extrabold text-blue-400">Get in Touch.</h1>
           <p className="text-black leading-relaxed">
             Whether you have questions about our services, need support, or want
             to share your feedback, our dedicated team is here to assist you

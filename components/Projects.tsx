@@ -4,7 +4,7 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import Link from 'next/link'
 
 const videos = [
-  { title: 'Addictive Eyes', description: 'Sir Musiz studio.', videoId: 'SkZWB3LDURk' },
+  { title: 'Addictive Eyes', description: 'SiR Musiz Studios.', videoId: 'SkZWB3LDURk' },
   { title: 'Hanju(Official)', description: 'Official Music Visualizer.', videoId: 'puqYqs0tDPg' },
   { title: 'Missing You (Official Audio)', description: 'AD Rapstar', videoId: 'f5m5Nd50LZI' },
   { title: 'Heartstrings', description: '(Official Visualizer) - AD Rapstar.', videoId: 'iHpMRAJWRhQ' },

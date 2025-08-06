@@ -16,14 +16,14 @@ const Home = () => {
 
   useEffect(() => {
     // This logic now runs only on the client
-    const hasVisited = sessionStorage.getItem('hasVisitedSirMusiz')
+    const hasVisited = sessionStorage.getItem('hasVisitedSirMusizStudios')
 
     if (hasVisited) {
       // If they've visited in this session, don't show the loader
       setLoading(false)
     } else {
       // On first visit in a session, show the loader, then set the flag
-      sessionStorage.setItem('hasVisitedSirMusiz', 'true')
+      sessionStorage.setItem('hasVisitedSirMusizStudios', 'true')
       const timer = setTimeout(() => {
         setLoading(false)
       }, 1500) // You can adjust this duration

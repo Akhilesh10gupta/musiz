@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: 'SiR Musiz Studios - Creative Audio & Visual Production',
-    template: '%s | SiR Musiz Studios', // For nested pages, e.g., "About Us | SiR Musiz"
+    template: '%s | SiR Musiz Studios', // For nested pages, e.g., "About Us | SiR Musiz Studios"
   },
   description: 'A creative haven where sonic innovation meets soulful storytelling. We turn raw ideas into immersive audio-visual experiences.',
   keywords: ['Music Production', 'Video Editing', 'Mixing', 'Audio Engineering', 'Graphics Design'],

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'SiR Musiz Studios',
     images: [
       {
-        url: 'https://sirmusizstudios.com/public/logo.png', // Replace with a link to your OG image
+        url: 'https://sirmusizstudios.com/logo.png', // Replace with a link to your OG image
         width: 1200,
         height: 630,
       },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: 'SiR Musiz Studios - Creative Audio & Visual Production',
     description: 'A creative haven for audio and visual arts.',
     // creator: '@your_twitter_handle', // Replace with your Twitter handle
-    images: ['https://sirmusizstudios.com/public/logo.png'], // Replace with a link to your OG image
+    images: ['https://sirmusizstudios.com/logo.png'], // Replace with a link to your OG image
   },
   icons: {
     icon: '/logo_2.png',
@@ -60,7 +60,7 @@ export default function RootLayout({
     '@type': 'MusicGroup', // Or 'Organization'
     name: 'SiR Musiz Studios',
     url: 'https://sirmusizstudios.com', // Replace with your actual domain
-    logo: 'https://sirmusizstudios.com/public/logo.png', // Replace with your logo URL
+    logo: 'https://sirmusizstudios.com/logo.png', // Replace with your logo URL
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+91 84678 98698', // Replace with your phone number

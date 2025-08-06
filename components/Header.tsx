@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             className="object-contain"
             priority
           />
-          <h1 className="sr-only">SiR Musiz Studios</h1>
+          <h1 className="sr-only">SiR Musiz Studios - Creative Audio & Visual Production</h1>
         </Link>
 
         {/* Desktop Navigation */}

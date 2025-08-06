@@ -207,7 +207,7 @@ export default function Hero() {
 
         <motion.img
           src="/vinyl.png"
-          alt="Vinyl"
+          alt="Musiz vinyl player representing sound production"
           animate={{
             rotate: isPlaying ? 360 : 0,
             y: isPlaying ? [0, -6, 0] : 0,

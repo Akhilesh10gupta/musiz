@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: '%s | SiR Musiz Studios', // For nested pages, e.g., "About Us | SiR Musiz Studios"
   },
   description: 'A creative haven where sonic innovation meets soulful storytelling. We turn raw ideas into immersive audio-visual experiences.',
-  keywords: ['Music Production', 'Video Editing', 'Mixing', 'Audio Engineering', 'Graphics Design'],
+  keywords: ['SiR Musiz Studios', 'Music Production', 'Video Editing', 'Mixing', 'Audio Engineering', 'Graphics Design'],
   openGraph: {
     title: 'SiR Musiz Studios- Creative Audio & Visual Production',
     description: 'A creative haven for audio and visual arts.',

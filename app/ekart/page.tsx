@@ -3,13 +3,11 @@ import React, { useState } from 'react';
 
 // Mock music sample data with categories
 const musicSamples = [
-  { id: 1, title: 'Electric Guitar Chords - Fire', genre: 'Hip Hop, Soul', bpm: 130, key: 'F min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b7.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample1' },
+  { id: 1, title: 'Electric Guitar Chords - Fire', genre: 'Hip Hop, Soul', bpm: 130, key: 'F min', url: 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample1' },
   { id: 2, title: 'Guitar Loop - Escape Stack', genre: 'Rock, Indie', bpm: 153, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b8.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample2' },
   { id: 3, title: 'Muted Funk Riff', genre: 'Funk, Disco', bpm: 112, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7b9.mp3', category: 'Guitar', gumroadUrl: 'https://gumroad.com/l/sample3' },
   { id: 4, title: 'Piano Chill Melody', genre: 'Chill, Lo-fi', bpm: 90, key: 'C maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c0.mp3', category: 'Piano', gumroadUrl: 'https://gumroad.com/l/sample4' },
-  { id: 5, title: 'Trap Beat', genre: 'Trap, Hip Hop', bpm: 140, key: 'A min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c1.mp3', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample5' },
   { id: 6, title: 'Jazz Sax Groove', genre: 'Jazz', bpm: 110, key: 'Bb maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c2.mp3', category: 'Saxophone', gumroadUrl: 'https://gumroad.com/l/sample6' },
-  { id: 7, title: 'EDM Drop', genre: 'EDM', bpm: 128, key: 'G min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c3.mp3', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample7' },
   { id: 8, title: 'Classical Strings', genre: 'Classical', bpm: 100, key: 'D maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c4.mp3', category: 'Strings', gumroadUrl: 'https://gumroad.com/l/sample8' },
   { id: 9, title: 'Pop Vocal Sample', genre: 'Pop', bpm: 120, key: 'E maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c5.mp3', category: 'Vocals', gumroadUrl: 'https://gumroad.com/l/sample9' },
   { id: 10, title: 'Ambient Pad', genre: 'Ambient', bpm: 80, key: 'G maj', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c6.mp3', category: 'Synth', gumroadUrl: 'https://gumroad.com/l/sample10' },
@@ -18,6 +16,17 @@ const musicSamples = [
   { id: 13, title: 'Latin Percussion', genre: 'Latin', bpm: 105, key: 'D min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7c9.mp3', category: 'Percussion', gumroadUrl: 'https://gumroad.com/l/sample13' },
   { id: 14, title: 'Hip Hop Vocal Chop', genre: 'Hip Hop', bpm: 95, key: 'F# min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d0.mp3', category: 'Vocals', gumroadUrl: 'https://gumroad.com/l/sample14' },
   { id: 15, title: 'Synthwave Lead', genre: 'Synthwave', bpm: 100, key: 'B min', url: 'https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b7b7d1.mp3', category: 'Synth', gumroadUrl: 'https://gumroad.com/l/sample15' },
+  { id: 16, title: 'Take over Master', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1sH-pGNGCd8V5AMXHUlWJEbPOaO_SNV5N', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample16' },
+  { id: 17, title: 'TakeOver_Basic Hi-Hat', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1dom42J2cFe9JLVZ4anvtJ1-vPQMSOTOm', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample17' },
+  { id: 18, title: 'TakeOver_BELL', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1rUylpep3yNk2hQAgXoyr3z1mRCU4XTV0', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample18' },
+  { id: 19, title: 'TakeOver_Cymatics - Fantasy - Prophet', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1rnMZdTHzXvvAlbN_rkckyKJZRAdL_jQp', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample19' },
+  { id: 20, title: 'TakeOver_Cymatics - Oracle Various Melody Loop 17', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=112UzbCHSEXWLrYCPwqoTnkB5pMMwlz4H', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample20' },
+  { id: 21, title: 'TakeOver_Edge Kick', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=18IVJtfd6lOZ1z39Ifri_y_RsiufBNqH-', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample21' },
+  { id: 22, title: 'TakeOver_ElevenLabs', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1MKtL56nO5zEQCAV5EkK4_fQJ6MYHMSEF', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample22' },
+  { id: 23, title: 'TakeOver_Filthy Snare', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1EqPDu64oXXtuStU_QWuEkNXDW_YgVvns', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample23' },
+  { id: 24, title: 'TakeOver_LaughingGirls Vox', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1O9_Wo4TnkPs5gi7Om6W_qI9RyJ8xkaGY', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample24' },
+  { id: 25, title: 'TakeOver_OH', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1KtlaCMsGXCngDwYsIGbgmjbd_Fjl-pr7', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample25' },
+  { id: 26, title: 'TakeOver_PAD', genre: 'Hip Hop', bpm: 120, key: 'C min', url: '/api/audio-proxy?id=1vYeGH428V89XiEpNtzdxzYk_ZLvxT54d', category: 'Beats', gumroadUrl: 'https://gumroad.com/l/sample26' }
 ];
 
 const categories = [
@@ -94,6 +103,14 @@ export default function EkartPage() {
             <audio
               src={sample.url}
               controls
+              controlsList="nodownload"
+              preload="none"
+              onTimeUpdate={(e) => {
+                if (e.currentTarget.currentTime >= 30) {
+                  e.currentTarget.pause();
+                  e.currentTarget.currentTime = 0;
+                }
+              }}
               className="w-full rounded-lg border border-blue-100"
             />
             {cart.includes(sample.id) ? (
